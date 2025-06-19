@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import CoverPage from '../components/CoverPage';
 import HeroSection from '../components/HeroSection';
 import CountdownTimer from '../components/CountdownTimer';
@@ -38,28 +39,120 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-amber-50 relative overflow-hidden">
+    <motion.div 
+      className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-amber-50 relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <FloralElements />
       <Navigation />
       <MusicPlayer />
       
-      <HeroSection />
-      <CountdownTimer />
-      <EventDetails />
-      <LoveStory />
-      <Gallery />
-      <RSVP guestName={guestName} />
-      <Wishes />
-      <DigitalGift />
-      <Contact />
+      <motion.div className="scroll-snap-y">
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <HeroSection />
+        </motion.div>
+        
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <CountdownTimer />
+        </motion.div>
+        
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <EventDetails />
+        </motion.div>
+        
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <LoveStory />
+        </motion.div>
+        
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <Gallery />
+        </motion.div>
+        
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <RSVP guestName={guestName} />
+        </motion.div>
+        
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <Wishes />
+        </motion.div>
+        
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <DigitalGift />
+        </motion.div>
+        
+        <motion.div 
+          className="scroll-snap-start"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <Contact />
+        </motion.div>
+      </motion.div>
       
-      <footer className="bg-gradient-to-r from-rose-900 to-pink-900 text-white py-8 text-center relative">
+      <motion.footer 
+        className="bg-gradient-to-r from-rose-900 to-pink-900 text-white py-8 text-center relative"
+        initial={{ y: 50, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative z-10">
           <p className="text-sm opacity-90">© 2024 Aldho & Jeje Wedding - Made with ❤️</p>
         </div>
-      </footer>
-    </div>
+      </motion.footer>
+    </motion.div>
   );
 };
 
