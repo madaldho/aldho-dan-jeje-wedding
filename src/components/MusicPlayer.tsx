@@ -1,17 +1,16 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [volume, setVolume] = useState(0.5);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = volume;
+      audioRef.current.volume = 0.5;
       audioRef.current.loop = true;
       
       // Auto-play music when component mounts
@@ -26,7 +25,7 @@ const MusicPlayer = () => {
       
       playAudio();
     }
-  }, [volume]);
+  }, []);
 
   const toggleMusic = async () => {
     if (audioRef.current) {
@@ -44,13 +43,6 @@ const MusicPlayer = () => {
     }
   };
 
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
-
   return (
     <>
       <audio
@@ -59,48 +51,62 @@ const MusicPlayer = () => {
         preload="auto"
       />
       
-      <div className="fixed bottom-24 right-4 z-50 flex gap-2">
-        <Button
-          onClick={toggleMusic}
-          className="bg-white/90 backdrop-blur-md hover:bg-white text-pink-600 rounded-full w-10 h-10 shadow-lg border border-white/50 transition-all duration-300 hover:scale-110"
-          size="icon"
+      <motion.div 
+        className="fixed top-4 right-4 z-50"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
-          {isPlaying ? (
-            <Pause className="w-4 h-4" />
-          ) : (
-            <Play className="w-4 h-4 ml-0.5" />
-          )}
-        </Button>
+          <Button
+            onClick={toggleMusic}
+            className="bg-white/90 backdrop-blur-xl hover:bg-white text-pink-600 rounded-full w-12 h-12 shadow-2xl border border-white/50 transition-all duration-300"
+            size="icon"
+          >
+            <motion.div
+              key={isPlaying ? 'pause' : 'play'}
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isPlaying ? (
+                <Pause className="w-5 h-5" />
+              ) : (
+                <Play className="w-5 h-5 ml-0.5" />
+              )}
+            </motion.div>
+          </Button>
+        </motion.div>
         
-        <Button
-          onClick={toggleMute}
-          className="bg-white/90 backdrop-blur-md hover:bg-white text-pink-600 rounded-full w-10 h-10 shadow-lg border border-white/50 transition-all duration-300 hover:scale-110"
-          size="icon"
-        >
-          {isMuted ? (
-            <VolumeX className="w-4 h-4" />
-          ) : (
-            <Volume2 className="w-4 h-4" />
-          )}
-        </Button>
-      </div>
-      
-      {/* Music wave animation */}
-      {isPlaying && (
-        <div className="fixed bottom-32 right-4 z-40 flex items-end gap-1">
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="w-1 bg-pink-500 rounded-full animate-pulse"
-              style={{
-                height: `${Math.random() * 20 + 10}px`,
-                animationDelay: `${i * 0.2}s`,
-                animationDuration: '0.8s'
-              }}
-            />
-          ))}
-        </div>
-      )}
+        {/* Music wave animation - minimal */}
+        {isPlaying && (
+          <motion.div 
+            className="absolute -bottom-1 -right-1 flex items-end gap-0.5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-0.5 bg-pink-500 rounded-full"
+                animate={{
+                  height: [2, 6, 2],
+                }}
+                transition={{
+                  duration: 0.8,
+                  repeat: Infinity,
+                  delay: i * 0.1,
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
+          </motion.div>
+        )}
+      </motion.div>
     </>
   );
 };

@@ -72,65 +72,104 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 }
 
-/* Arabic Font */
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+/* Wedding Typography */
+.font-elegant {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+}
+
+.font-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-vibes {
+  font-family: 'Great Vibes', cursive;
+}
 
 .font-arabic {
   font-family: 'Amiri', serif;
   direction: rtl;
   text-align: center;
+  font-weight: 400;
 }
 
-/* Enhanced Wedding Animations & Effects */
-@keyframes fall {
-  to {
-    transform: translateY(100vh) rotate(720deg) scale(0.5);
-  }
+/* Enhanced Glass Morphism */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.glass-effect-strong {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.8) rotateY(-15deg);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) rotateY(0deg);
-  }
+/* 3D Transform Effects */
+.transform-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
-@keyframes float {
+.card-3d {
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Enhanced Mobile Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #ec4899, #f97316);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #db2777, #ea580c);
+}
+
+/* Wedding Animations */
+@keyframes float-gentle {
   0%, 100% {
-    transform: translateY(0px) rotateZ(0deg);
+    transform: translateY(0px) rotate(0deg);
   }
   25% {
-    transform: translateY(-10px) rotateZ(2deg);
+    transform: translateY(-8px) rotate(1deg);
   }
   50% {
-    transform: translateY(-20px) rotateZ(0deg);
+    transform: translateY(-15px) rotate(0deg);
   }
   75% {
-    transform: translateY(-10px) rotateZ(-2deg);
+    transform: translateY(-8px) rotate(-1deg);
   }
 }
 
-@keyframes sparkle {
+@keyframes sparkle-dance {
   0%, 100% {
     opacity: 0;
     transform: scale(0.5) rotate(0deg);
@@ -141,84 +180,63 @@
   }
 }
 
-@keyframes pulse-3d {
+@keyframes heart-beat {
   0%, 100% {
-    transform: scale(1) rotateY(0deg);
-    box-shadow: 0 0 20px rgba(244, 63, 94, 0.3);
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
   }
   50% {
-    transform: scale(1.05) rotateY(10deg);
-    box-shadow: 0 10px 40px rgba(244, 63, 94, 0.5);
+    transform: scale(1.05);
+  }
+  75% {
+    transform: scale(1.15);
   }
 }
 
-@keyframes slide-up-3d {
+@keyframes fade-slide-up {
   from {
     opacity: 0;
-    transform: translateY(50px) rotateX(20deg) scale(0.9);
+    transform: translateY(40px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotateX(0deg) scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
-  opacity: 0;
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
-.animate-scale-in {
-  animation: scale-in 0.8s ease-out forwards;
-  opacity: 0;
+.animate-float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+.animate-sparkle-dance {
+  animation: sparkle-dance 2s ease-in-out infinite;
 }
 
-.animate-sparkle {
-  animation: sparkle 2s ease-in-out infinite;
+.animate-heart-beat {
+  animation: heart-beat 2s ease-in-out infinite;
 }
 
-.animate-pulse-3d {
-  animation: pulse-3d 3s ease-in-out infinite;
+.animate-fade-slide-up {
+  animation: fade-slide-up 0.8s ease-out forwards;
 }
 
-.animate-slide-up-3d {
-  animation: slide-up-3d 0.8s ease-out forwards;
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
 }
 
-/* Mobile-First Typography */
-.font-elegant {
-  font-family: 'Playfair Display', Georgia, serif;
-}
-
-/* Smooth scrolling with 3D perspective */
-html {
-  scroll-behavior: smooth;
-  perspective: 1000px;
-}
-
-/* Enhanced Mobile-optimized scrollbar */
-::-webkit-scrollbar {
-  width: 3px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #f43f5e, #ec4899, #a855f7);
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #e11d48, #db2777, #9333ea);
-}
-
-/* Touch-friendly interactions with 3D effects */
+/* Touch Interactions */
 @media (max-width: 768px) {
   .container {
     padding-left: 1rem;
@@ -228,93 +246,70 @@ html {
   button, a {
     min-height: 44px;
     min-width: 44px;
-    transform-style: preserve-3d;
-    transition: transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
   }
   
-  button:active, a:active {
-    transform: scale(0.95) translateZ(-5px);
+  .touch-action {
+    touch-action: manipulation;
   }
 }
 
-/* Enhanced Glass morphism effects */
-.backdrop-blur-md {
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+/* Improved Button Styles */
+.btn-wedding {
+  @apply bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105;
 }
 
-.backdrop-blur-sm {
-  backdrop-filter: blur(8px) saturate(150%);
-  -webkit-backdrop-filter: blur(8px) saturate(150%);
+.btn-wedding:active {
+  @apply scale-95;
 }
 
-.backdrop-blur-xl {
-  backdrop-filter: blur(24px) saturate(200%);
-  -webkit-backdrop-filter: blur(24px) saturate(200%);
+/* Enhanced Card Styles */
+.card-wedding {
+  @apply bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-3xl;
 }
 
-/* 3D Perspective helpers */
-.perspective-1000 {
-  perspective: 1000px;
+/* Wedding Color Palette */
+.text-wedding-primary {
+  @apply text-pink-600;
 }
 
-.preserve-3d {
-  transform-style: preserve-3d;
+.text-wedding-secondary {
+  @apply text-orange-600;
 }
 
-/* Enhanced Floral gradient backgrounds */
-.bg-floral-gradient {
-  background: linear-gradient(135deg, #fef7cd 0%, #fde68a 25%, #fca5a5 50%, #f9a8d4 75%, #c084fc 100%);
+.bg-wedding-gradient {
+  @apply bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500;
 }
 
-.bg-floral-gradient-alt {
-  background: linear-gradient(45deg, #fef3c7 0%, #fed7aa 33%, #fecaca 66%, #f3e8ff 100%);
+.bg-wedding-light {
+  @apply bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50;
 }
 
-/* Custom scroll snap for mobile */
-.scroll-snap-y {
-  scroll-snap-type: y mandatory;
-}
-
-.scroll-snap-start {
-  scroll-snap-align: start;
-}
-
-/* Enhanced interactive elements */
-.interactive-3d {
-  transform-style: preserve-3d;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.interactive-3d:hover {
-  transform: translateY(-5px) rotateX(5deg) rotateY(5deg) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* Parallax scroll effect */
-.parallax {
-  will-change: transform;
-}
-
-/* Enhanced loading animations */
-@keyframes shimmer {
-  0% {
-    background-position: -200px 0;
+/* Responsive Typography */
+@media (max-width: 640px) {
+  .text-responsive-xl {
+    @apply text-2xl;
   }
-  100% {
-    background-position: calc(200px + 100%) 0;
+  
+  .text-responsive-2xl {
+    @apply text-3xl;
+  }
+  
+  .text-responsive-3xl {
+    @apply text-4xl;
   }
 }
 
-.shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200px 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-/* Islamic calligraphy styling */
-.islamic-calligraphy {
-  font-family: 'Amiri', serif;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  letter-spacing: 0.05em;
+@media (min-width: 641px) {
+  .text-responsive-xl {
+    @apply text-3xl;
+  }
+  
+  .text-responsive-2xl {
+    @apply text-4xl;
+  }
+  
+  .text-responsive-3xl {
+    @apply text-5xl;
+  }
 }

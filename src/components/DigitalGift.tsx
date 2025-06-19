@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Gift, Copy, CreditCard, Smartphone, Heart } from 'lucide-react';
+import { Gift, Copy, CreditCard, Smartphone, Heart, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 
@@ -16,15 +16,17 @@ const DigitalGift = () => {
       name: 'Aldho Ramadhan',
       number: '1234567890',
       icon: CreditCard,
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-pink-500 to-rose-500',
+      bgGradient: 'from-pink-500/20 to-rose-500/20'
     },
     {
       id: 'mandiri',
       bank: 'Bank Mandiri',
-      name: 'Jeje Cantika',
+      name: 'Jessica Amelia',
       number: '0987654321',
       icon: CreditCard,
-      color: 'from-yellow-500 to-orange-500'
+      color: 'from-rose-500 to-orange-500',
+      bgGradient: 'from-rose-500/20 to-orange-500/20'
     },
     {
       id: 'dana',
@@ -32,7 +34,8 @@ const DigitalGift = () => {
       name: 'Aldho & Jeje',
       number: '081234567890',
       icon: Smartphone,
-      color: 'from-cyan-500 to-blue-500'
+      color: 'from-orange-500 to-pink-500',
+      bgGradient: 'from-orange-500/20 to-pink-500/20'
     }
   ];
 
@@ -56,12 +59,12 @@ const DigitalGift = () => {
             key={i}
             className="absolute"
             animate={{
-              scale: [1, 1.2, 1],
+              scale: [1, 1.3, 1],
               rotate: [0, 180, 360],
-              opacity: [0.1, 0.3, 0.1]
+              opacity: [0.1, 0.4, 0.1]
             }}
             transition={{
-              duration: 8 + i * 0.5,
+              duration: 10 + i * 0.5,
               repeat: Infinity,
               delay: i * 0.3
             }}
@@ -70,7 +73,11 @@ const DigitalGift = () => {
               left: `${Math.random() * 100}%`,
             }}
           >
-            <Gift className="text-pink-300" size={20} />
+            {i % 2 === 0 ? (
+              <Gift className="text-pink-300" size={18} />
+            ) : (
+              <Sparkles className="text-orange-300" size={16} />
+            )}
           </motion.div>
         ))}
       </div>
@@ -84,14 +91,29 @@ const DigitalGift = () => {
           className="text-center mb-12"
         >
           <motion.div
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="inline-block mb-4"
+            animate={{ 
+              rotate: [0, 10, -10, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="inline-block mb-6"
           >
-            <Gift className="w-12 h-12 text-pink-500 mx-auto" />
+            <div className="relative">
+              <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center shadow-2xl">
+                <Gift className="w-8 h-8 text-white" />
+              </div>
+              <motion.div
+                className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              >
+                <Sparkles className="w-3 h-3 text-white" />
+              </motion.div>
+            </div>
           </motion.div>
+          
           <h2 className="text-3xl font-bold text-gray-800 mb-4 font-elegant">
-            Kado Digital
+            Amplop Digital
           </h2>
           <p className="text-gray-600 text-sm leading-relaxed">
             Doa restu Anda adalah kado terindah bagi kami. Namun jika ingin memberikan kado, 
@@ -99,64 +121,112 @@ const DigitalGift = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           {accounts.map((account, index) => {
             const Icon = account.icon;
             
             return (
               <motion.div
                 key={account.id}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.15,
+                  type: "spring",
+                  stiffness: 200
+                }}
+                whileHover={{ 
+                  scale: 1.02,
+                  rotateY: 5,
+                  transition: { duration: 0.2 }
+                }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-                  {/* Gradient Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${account.color} opacity-10`} />
+                <Card className="relative overflow-hidden border-0 shadow-2xl bg-white/20 backdrop-blur-xl">
+                  {/* Glass morphism background with gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${account.bgGradient}`} />
+                  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
+                  
+                  {/* Animated background pattern */}
+                  <div className="absolute inset-0 opacity-20">
+                    {[...Array(6)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-2 h-2 bg-white rounded-full"
+                        animate={{
+                          x: [0, 50, 0],
+                          y: [0, 30, 0],
+                          opacity: [0, 1, 0]
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          delay: i * 0.7,
+                          ease: "easeInOut"
+                        }}
+                        style={{
+                          top: `${20 + i * 15}%`,
+                          left: `${10 + i * 10}%`,
+                        }}
+                      />
+                    ))}
+                  </div>
                   
                   <CardContent className="p-6 relative">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
-                        <div className={`p-3 rounded-xl bg-gradient-to-r ${account.color} shadow-lg`}>
+                        <motion.div 
+                          className={`p-4 rounded-2xl bg-gradient-to-r ${account.color} shadow-xl`}
+                          whileHover={{ rotate: 10, scale: 1.1 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
                           <Icon className="w-6 h-6 text-white" />
-                        </div>
+                        </motion.div>
+                        
                         <div>
-                          <h3 className="font-semibold text-gray-800 text-lg">
+                          <h3 className="font-bold text-gray-800 text-lg mb-1 font-elegant">
                             {account.bank}
                           </h3>
-                          <p className="text-gray-600 text-sm">
+                          <p className="text-gray-700 text-sm mb-2">
                             {account.name}
                           </p>
-                          <p className="font-mono text-lg font-bold text-gray-800 mt-1">
+                          <motion.p 
+                            className="font-mono text-lg font-bold text-gray-800"
+                            whileHover={{ scale: 1.05 }}
+                          >
                             {account.number}
-                          </p>
+                          </motion.p>
                         </div>
                       </div>
                       
-                      <Button
-                        onClick={() => copyToClipboard(account.number, account.id)}
-                        className={`bg-gradient-to-r ${account.color} hover:shadow-lg transition-all duration-300 text-white rounded-xl`}
-                        size="sm"
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        {copiedAccount === account.id ? (
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="flex items-center"
-                          >
-                            <Heart className="w-4 h-4 mr-1" />
-                            Tersalin
-                          </motion.div>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4 mr-1" />
-                            Salin
-                          </>
-                        )}
-                      </Button>
+                        <Button
+                          onClick={() => copyToClipboard(account.number, account.id)}
+                          className={`bg-gradient-to-r ${account.color} hover:shadow-xl transition-all duration-300 text-white rounded-xl border-0 shadow-lg`}
+                          size="sm"
+                        >
+                          {copiedAccount === account.id ? (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="flex items-center"
+                            >
+                              <Heart className="w-4 h-4 mr-1" />
+                              Tersalin
+                            </motion.div>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4 mr-1" />
+                              Salin
+                            </>
+                          )}
+                        </Button>
+                      </motion.div>
                     </div>
                   </CardContent>
                 </Card>
@@ -169,17 +239,25 @@ const DigitalGift = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-8 p-6 bg-gradient-to-r from-pink-100 to-orange-100 rounded-2xl border border-pink-200"
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-10 p-6 bg-white/20 backdrop-blur-xl rounded-3xl border border-white/30 shadow-2xl"
         >
           <div className="text-center">
-            <Heart className="w-8 h-8 text-pink-500 mx-auto mb-3" />
-            <p className="text-gray-700 text-sm leading-relaxed">
-              "Barangsiapa yang memberikan kebaikan kepada saudaranya, 
-              maka Allah akan memberikan kebaikan kepadanya."
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Heart className="w-8 h-8 text-pink-500 mx-auto mb-4" />
+            </motion.div>
+            
+            <div className="text-lg mb-3 font-arabic text-pink-700">
+              وَمَن تَطَوَّعَ خَيْرًا فَهُوَ خَيْرٌ لَّهُ
+            </div>
+            <p className="text-gray-700 text-sm leading-relaxed italic mb-3">
+              "Barangsiapa yang dengan sukarela mengerjakan kebaikan, maka itu lebih baik baginya"
             </p>
-            <p className="text-pink-600 text-xs mt-2 font-medium">
-              - HR. Muslim -
+            <p className="text-pink-600 text-xs font-medium">
+              - QS. Al-Baqarah: 184 -
             </p>
           </div>
         </motion.div>

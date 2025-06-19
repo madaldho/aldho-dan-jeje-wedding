@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import CoverPage from '../components/CoverPage';
 import HeroSection from '../components/HeroSection';
 import CountdownTimer from '../components/CountdownTimer';
+import BrideGroom from '../components/BrideGroom';
 import EventDetails from '../components/EventDetails';
-import LoveStory from '../components/LoveStory';
 import Gallery from '../components/Gallery';
 import RSVP from '../components/RSVP';
 import Wishes from '../components/Wishes';
@@ -68,6 +68,16 @@ const Index = () => {
         >
           <CountdownTimer />
         </motion.div>
+
+        <motion.div 
+          id="bride-groom"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <BrideGroom />
+        </motion.div>
         
         <motion.div 
           id="event-details"
@@ -77,16 +87,6 @@ const Index = () => {
           transition={{ duration: 0.8 }}
         >
           <EventDetails />
-        </motion.div>
-        
-        <motion.div 
-          id="love-story"
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <LoveStory />
         </motion.div>
         
         <motion.div 
@@ -149,7 +149,7 @@ const Index = () => {
       >
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative z-10">
-          <p className="text-sm opacity-90">© 2024 Aldho & Jeje Wedding - Made with ❤️</p>
+          <p className="text-sm opacity-90 font-elegant">© 2024 Aldho & Jeje Wedding - Made with ❤️</p>
         </div>
       </motion.footer>
     </motion.div>
