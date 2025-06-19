@@ -1,10 +1,12 @@
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Home, Calendar, MapPin, Heart, Camera, Users, Gift, Phone } from 'lucide-react';
+import { Home, Calendar, MapPin, Heart, Camera, Users, Gift, MessageCircle } from 'lucide-react';
+import { LimelightNav, NavItem } from './ui/limelight-nav';
 
 const TabNavigation = () => {
   const [activeTab, setActiveTab] = useState('hero');
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const tabs = [
     { id: 'hero', icon: Home, label: 'Home' },
@@ -13,20 +15,24 @@ const TabNavigation = () => {
     { id: 'event-details', icon: MapPin, label: 'Acara' },
     { id: 'gallery', icon: Camera, label: 'Galeri' },
     { id: 'rsvp', icon: Users, label: 'RSVP' },
-    { id: 'digital-gift', icon: Gift, label: 'Kado' },
-    { id: 'contact', icon: Phone, label: 'Kontak' }
+    { id: 'wishes', icon: MessageCircle, label: 'Ucapan' },
+    { id: 'digital-gift', icon: Gift, label: 'Kado' }
   ];
 
   useEffect(() => {
     const handleScroll = () => {
+      // Skip scroll detection when programmatically scrolling
+      if (isScrolling) return;
+      
       // Update active tab based on scroll position
       const sections = tabs.map(tab => document.getElementById(tab.id));
-      const scrollPos = window.scrollY + 200;
+      const scrollPos = window.scrollY + 150;
       
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section && section.offsetTop <= scrollPos) {
           setActiveTab(tabs[i].id);
+          setActiveIndex(i);
           break;
         }
       }
@@ -34,56 +40,82 @@ const TabNavigation = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isScrolling]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setIsScrolling(true);
+      const offsetTop = element.offsetTop;
+      const offset = sectionId === 'hero' ? 0 : 100; // No offset for hero, 100px for others to account for fixed nav
+      
+      window.scrollTo({
+        top: offsetTop - offset,
+        behavior: 'smooth'
+      });
+      
+      // Reset scrolling flag after animation completes
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, 1000); // Smooth scroll usually takes ~500-800ms
     }
   };
 
+  const handleTabChange = (index: number) => {
+    setActiveIndex(index);
+    setActiveTab(tabs[index].id);
+    // Add small delay to ensure state updates before scrolling
+    setTimeout(() => {
+      scrollToSection(tabs[index].id);
+    }, 50);
+  };
+
+  const navItems: NavItem[] = tabs.map((tab, index) => ({
+    id: tab.id,
+    icon: <tab.icon className="w-6 h-6" />,
+    label: tab.label,
+    onClick: () => {
+      // This will be handled by onTabChange in LimelightNav
+      // No need to call scrollToSection here to avoid duplication
+    }
+  }));
+
   return (
-    <motion.div 
-      className="fixed bottom-0 left-0 right-0 z-50"
-      initial={{ y: 100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-    >
-      <div className="bg-white/95 backdrop-blur-xl border-t border-pink-200/50 shadow-2xl">
-        <div className="flex items-center justify-around px-1 py-2">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            
-            return (
-              <motion.button
-                key={tab.id}
-                onClick={() => scrollToSection(tab.id)}
-                className={`flex flex-col items-center p-2 rounded-xl transition-all duration-300 min-w-0 ${
-                  isActive 
-                    ? 'bg-gradient-to-r from-pink-500 to-orange-500 text-white shadow-lg' 
-                    : 'text-gray-600 hover:text-pink-500 hover:bg-pink-50'
-                }`}
-                whileTap={{ scale: 0.9 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Icon className="w-4 h-4 mb-1" />
-                <span className="text-xs font-medium truncate">{tab.label}</span>
-                
-                {isActive && (
-                  <motion.div
-                    className="absolute -top-1 w-6 h-1 bg-white rounded-full"
-                    layoutId="activeIndicator"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </motion.button>
-            );
-          })}
-        </div>
+    <div className="tab-navigation">
+      <div 
+        className="w-full max-w-fit animate-slideUpNav"
+        style={{ animationDelay: '0.5s' }}
+      >
+        <LimelightNav
+          items={navItems}
+          defaultActiveIndex={0}
+          activeIndex={activeIndex}
+          onTabChange={handleTabChange}
+          className="bg-white/95 backdrop-blur-xl border border-rose-200/50 shadow-lg mx-auto"
+          limelightClassName="bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 shadow-[0_50px_15px_rgba(244,63,94,0.3)]"
+          iconContainerClassName="hover:bg-rose-50/50 transition-colors duration-200"
+          iconClassName="text-slate-600 hover:text-rose-500"
+        />
       </div>
-    </motion.div>
+      
+      <style jsx>{`
+        @keyframes slideUpNav {
+          from {
+            transform: translateY(100px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        
+        .animate-slideUpNav {
+          animation: slideUpNav 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+          opacity: 0;
+        }
+      `}</style>
+    </div>
   );
 };
 

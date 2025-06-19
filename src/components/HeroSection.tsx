@@ -1,150 +1,165 @@
 
+import { Flower, Heart, Sparkles, Star, Flower2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Flower, Heart, Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    setIsLoaded(true);
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePosition({ x, y });
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <section 
       id="hero" 
-      className="min-h-screen relative flex items-center justify-center overflow-hidden"
-      style={{
-        transform: `translateY(${scrollY * 0.5}px)`,
-      }}
+      className="min-h-screen relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50"
+      onMouseMove={handleMouseMove}
     >
-      {/* Background with parallax */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")',
-          transform: `translateY(${scrollY * 0.3}px) scale(1.1)`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-pink-900/70 via-rose-800/60 to-orange-700/70"></div>
+      {/* Enhanced Background Pattern */}
+      <div className="absolute inset-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-25 transition-all duration-1000"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")',
+            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-rose-500/15 via-pink-500/10 to-orange-500/15 animate-gradient-shift"></div>
+        
+        {/* Interactive decorative circles */}
+        <div 
+          className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-rose-300/30 to-pink-300/20 rounded-full blur-xl transition-all duration-500 animate-pulse"
+          style={{
+            transform: `translate(${mousePosition.x * 0.05}px, ${mousePosition.y * 0.03}px)`
+          }}
+        ></div>
+        <div 
+          className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-orange-300/25 to-rose-300/20 rounded-full blur-xl transition-all duration-700 animate-pulse"
+          style={{
+            transform: `translate(${-mousePosition.x * 0.03}px, ${-mousePosition.y * 0.04}px)`
+          }}
+        ></div>
+        <div 
+          className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-pink-300/25 to-orange-300/20 rounded-full blur-xl transition-all duration-600 animate-pulse"
+          style={{
+            transform: `translate(${mousePosition.x * 0.04}px, ${-mousePosition.y * 0.02}px)`
+          }}
+        ></div>
+        
+        {/* Additional floating elements */}
+        <div className="absolute top-32 right-1/4 w-16 h-16 bg-gradient-to-br from-yellow-300/20 to-orange-300/15 rounded-full blur-lg animate-bounce"></div>
+        <div className="absolute bottom-32 left-1/3 w-20 h-20 bg-gradient-to-br from-rose-300/20 to-pink-300/15 rounded-full blur-lg animate-pulse"></div>
       </div>
 
-      {/* Floating elements animation */}
+      {/* Enhanced Floating elements animation */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            animate={{
-              y: [0, -20, 0],
-              x: [0, Math.sin(i) * 30, 0],
-              rotate: [0, 360],
-              opacity: [0.3, 0.8, 0.3]
-            }}
-            transition={{
-              duration: 6 + i,
-              repeat: Infinity,
-              delay: i * 0.8,
-              ease: "easeInOut"
-            }}
-            style={{
-              top: `${20 + i * 10}%`,
-              left: `${10 + i * 12}%`,
-            }}
-          >
-            {i % 3 === 0 ? (
-              <Heart className="text-pink-300/40" size={16 + i * 3} />
-            ) : i % 3 === 1 ? (
-              <Flower className="text-orange-300/40" size={18 + i * 2} />
-            ) : (
-              <Sparkles className="text-rose-300/40" size={14 + i * 3} />
-            )}
-          </motion.div>
-        ))}
+        {[...Array(12)].map((_, i) => {
+          const icons = [Heart, Flower, Sparkles, Star, Flower2];
+          const Icon = icons[i % icons.length];
+          const colors = ['text-pink-300/40', 'text-orange-300/40', 'text-rose-300/40', 'text-yellow-300/40', 'text-purple-300/40'];
+          const animations = ['animate-bounce', 'animate-pulse', 'animate-ping', 'animate-float'];
+          
+          return (
+            <div
+              key={i}
+              className={`absolute ${animations[i % animations.length]} transition-all duration-500`}
+              style={{
+                top: `${15 + (i * 8)}%`,
+                left: `${8 + (i * 9)}%`,
+                animationDelay: `${i * 0.6}s`,
+                animationDuration: `${4 + (i % 4)}s`,
+                transform: `translate(${mousePosition.x * (0.01 + i * 0.002)}px, ${mousePosition.y * (0.01 + i * 0.002)}px)`
+              }}
+            >
+              <Icon 
+                className={`${colors[i % colors.length]} hover:scale-125 transition-transform duration-300`} 
+                size={14 + (i % 4) * 4} 
+              />
+            </div>
+          );
+        })}
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 max-w-sm mx-auto">
-        {/* Arabic Calligraphy */}
-        <motion.div 
-          className="mb-8"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1 }}
-        >
-          <div className="text-3xl mb-4 font-arabic text-orange-200">
+      {/* Enhanced Content */}
+      <div className="relative z-10 text-center px-4 max-w-2xl mx-auto">
+        {/* Arabic Calligraphy with enhanced styling */}
+        <div className={`mb-12 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="text-4xl md:text-5xl mb-6 font-arabic text-rose-600 animate-shimmer">
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
           </div>
-          <p className="text-sm opacity-80">Bismillahirrahmanirrahim</p>
-        </motion.div>
+          <p className="text-base md:text-lg text-slate-600 font-light tracking-wider">Bismillahirrahmanirrahim</p>
+        </div>
 
-        <motion.div 
-          className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-        >
-          <div className="text-2xl mb-4 font-arabic text-orange-200">
-            السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
-          </div>
-          <p className="text-xs font-light tracking-[0.3em] mb-4 opacity-90">
-            ASSALAMU'ALAIKUM WR. WB.
-          </p>
-          
-          <p className="text-xs font-light tracking-[0.2em] mb-4 opacity-90">
-            THE WEDDING OF
-          </p>
-          
-          <div className="relative">
-            <motion.h1 
-              className="text-4xl font-bold mb-6 bg-gradient-to-r from-pink-300 via-rose-300 to-orange-300 bg-clip-text text-transparent font-elegant"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              Aldho
-            </motion.h1>
+        <div className="glass-card rounded-3xl p-8 md:p-12 border border-rose-200/30 shadow-2xl hover:shadow-3xl transition-all duration-500 animate-pulse-glow">
+          <div className={`transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="text-2xl md:text-3xl mb-6 font-arabic text-rose-600 animate-gradient-shift">
+              السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+            </div>
+            <p className="text-sm md:text-base font-light tracking-[0.3em] mb-6 text-slate-600">
+              ASSALAMU'ALAIKUM WR. WB.
+            </p>
             
-            <div className="flex items-center justify-center my-4">
-              <div className="w-12 h-0.5 bg-gradient-to-r from-pink-300 to-transparent"></div>
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-              >
-                <Flower className="text-orange-300 mx-3" size={20} />
-              </motion.div>
-              <div className="w-12 h-0.5 bg-gradient-to-l from-orange-300 to-transparent"></div>
+            <p className="text-xs md:text-sm font-light tracking-[0.2em] mb-8 text-slate-500">
+              THE WEDDING OF
+            </p>
+          </div>
+          
+          <div className={`relative transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 gradient-text font-elegant hover:scale-105 transition-transform duration-300 cursor-default">
+              Aldho
+            </h1>
+            
+            <div className="flex items-center justify-center my-8 md:my-12">
+              <div className="w-20 md:w-24 h-0.5 bg-gradient-to-r from-rose-400 to-transparent animate-shimmer"></div>
+              <div className="mx-6 md:mx-8">
+                <div className="relative">
+                  <Flower className="text-orange-500 animate-spin hover:scale-125 transition-all duration-300" size={32} style={{ animationDuration: '8s' }} />
+                  <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-lg animate-pulse"></div>
+                </div>
+              </div>
+              <div className="w-20 md:w-24 h-0.5 bg-gradient-to-l from-orange-400 to-transparent animate-shimmer"></div>
             </div>
             
-            <motion.h1 
-              className="text-4xl font-bold mb-6 bg-gradient-to-r from-orange-300 via-rose-300 to-pink-300 bg-clip-text text-transparent font-elegant"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-            >
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-10 gradient-text font-elegant hover:scale-105 transition-transform duration-300 cursor-default">
               Jeje
-            </motion.h1>
+            </h1>
           </div>
           
-          <div className="mb-6">
-            <p className="text-sm font-light mb-2 text-pink-200">
-              Putra dari Bapak Ahmad & Ibu Siti
-            </p>
-            <p className="text-sm font-light text-pink-200">
-              Putri dari Bapak Budi & Ibu Dewi
-            </p>
+          <div className={`max-w-lg mx-auto transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="glass-card p-6 md:p-8 rounded-2xl mb-8 hover:bg-white/20 transition-all duration-300">
+              <blockquote className="text-lg md:text-xl font-arabic text-rose-600 mb-4 leading-relaxed">
+                وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجاً
+              </blockquote>
+              <blockquote className="text-sm md:text-base font-light italic leading-relaxed text-rose-600 mb-3">
+                "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri"
+              </blockquote>
+              <p className="text-xs md:text-sm text-slate-500 font-arabic">- QS. Ar-Rum: 21 -</p>
+            </div>
+            
+            {/* Interactive scroll indicator */}
+            <div className="mt-12 animate-bounce">
+              <div className="w-6 h-10 border-2 border-rose-400 rounded-full mx-auto relative">
+                <div className="w-1 h-3 bg-rose-400 rounded-full mx-auto mt-2 animate-pulse"></div>
+              </div>
+              <p className="text-xs text-slate-500 mt-2 font-light">Scroll untuk melihat lebih</p>
+            </div>
           </div>
-
-          <div className="max-w-xs mx-auto">
-            <blockquote className="text-xs font-light italic leading-relaxed text-orange-200 mb-2">
-              "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجاً"
-            </blockquote>
-            <blockquote className="text-xs font-light italic leading-relaxed text-orange-200">
-              "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri"
-            </blockquote>
-            <p className="text-xs mt-3 opacity-75">- QS. Ar-Rum: 21 -</p>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

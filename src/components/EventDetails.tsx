@@ -1,13 +1,14 @@
 
 import { Button } from '@/components/ui/button';
-import { Calendar, MapPin, Flower } from 'lucide-react';
+import { Calendar, MapPin, Flower, Navigation } from 'lucide-react';
+import { ShinyButton } from '@/components/ui/shiny-button';
 
 const EventDetails = () => {
   const handleSaveToCalendar = () => {
     const startDate = '20250713T110000Z';
     const endDate = '20250713T150000Z';
     const title = 'Pernikahan Aldho & Jeje';
-    const location = 'Masjid Agung Cirebon';
+    const location = 'Rumah Mempelai Wanita';
     const details = 'Acara Pernikahan Aldho & Jeje';
     
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&location=${encodeURIComponent(location)}&details=${encodeURIComponent(details)}`;
@@ -15,113 +16,146 @@ const EventDetails = () => {
     window.open(googleCalendarUrl, '_blank');
   };
 
-  const handleOpenMaps = (location: string) => {
-    window.open(`https://maps.google.com/?q=${encodeURIComponent(location)}`, '_blank');
+  const handleOpenMaps = () => {
+    window.open('https://maps.app.goo.gl/rJJZujdgyCajtAZH8', '_blank');
   };
 
   return (
-    <section id="event-details" className="py-16 bg-gradient-to-br from-white via-rose-50 to-pink-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-4">
-            <Flower className="text-rose-500 animate-pulse" size={32} />
+    <section id="event-details" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50 relative overflow-hidden">
+      {/* Enhanced Floating floral elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-rose-500/8 via-pink-500/6 to-orange-500/8 animate-gradient-shift"></div>
+        <Flower className="absolute top-10 left-10 text-rose-300/50 animate-float" size={28} />
+        <Flower className="absolute top-32 right-16 text-pink-300/50 animate-pulse" size={24} />
+        <Flower className="absolute bottom-20 left-20 text-orange-300/50 animate-bounce" size={32} />
+        <Flower className="absolute bottom-40 right-10 text-rose-300/50 animate-float" size={26} />
+        <Flower className="absolute top-1/2 left-1/4 text-pink-300/30 animate-pulse" size={20} />
+        <Flower className="absolute top-1/3 right-1/3 text-orange-300/30 animate-float" size={18} />
+      </div>
+      
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="text-center mb-20">
+          <div className="flex justify-center mb-8">
+            <div className="glass-card rounded-full p-6 shadow-2xl animate-pulse">
+              <Flower className="text-rose-500 animate-bounce" size={48} />
+            </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-800 font-elegant">
+          <h2 className="text-5xl md:text-6xl font-bold mb-8 text-slate-800 font-elegant gradient-text animate-shimmer">
             Detail Acara
           </h2>
-          <p className="text-lg text-slate-600">
-            Informasi lengkap acara pernikahan kami
+          <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-medium">
+            Dengan penuh sukacita, kami mengundang Anda untuk hadir dalam momen bahagia kami
           </p>
         </div>
 
-        <div className="space-y-8 max-w-lg mx-auto">
-          {/* Akad Nikah */}
-          <div className="bg-gradient-to-br from-rose-100 to-pink-100 rounded-3xl p-6 shadow-lg border border-rose-200 transform transition-all duration-300 hover:scale-105">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-rose-700 mb-2 font-elegant">Akad Nikah</h3>
-              <div className="w-16 h-1 bg-gradient-to-r from-rose-500 to-pink-500 mx-auto rounded-full"></div>
+        <div className="space-y-16 max-w-4xl mx-auto">
+          {/* Combined Event Card */}
+          <div className="backdrop-blur-md bg-white/30 rounded-3xl p-8 md:p-12 transform transition-all duration-500 hover:scale-[1.02] animate-fadeInUp border border-white/40 shadow-lg">
+            <div className="text-center mb-12">
+              <h3 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 font-elegant gradient-text animate-shimmer">Akad Nikah & Resepsi</h3>
+              <div className="w-32 h-2 bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 mx-auto rounded-full animate-shimmer"></div>
             </div>
             
-            <div className="space-y-4">
-              <div className="flex items-center bg-white/50 rounded-2xl p-4">
-                <Calendar className="w-6 h-6 text-rose-600 mr-4 flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-slate-800">Minggu, 13 Juli 2025</p>
-                  <p className="text-slate-600 text-sm">11:00 - 12:30 WIB</p>
+            <div className="flex flex-col md:flex-row gap-8 items-stretch">
+              <div className="flex-1 backdrop-blur-xl bg-white/30 rounded-3xl p-8 hover:scale-102 transition-all duration-500 border border-white/50 shadow-xl group">
+                <div className="flex flex-col items-center text-center space-y-6">
+                  <div className="bg-gradient-to-br from-rose-400 to-rose-600 rounded-full p-4 transform group-hover:rotate-12 transition-transform duration-300 shadow-lg">
+                    <Calendar className="w-10 h-10 text-white" />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-2xl md:text-3xl bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                      Minggu, 13 Juli 2025
+                    </h4>
+                    <div className="h-1 w-20 mx-auto bg-gradient-to-r from-rose-400 to-orange-400 rounded-full"></div>
+                    <p className="text-slate-600 text-xl font-medium tracking-wide">
+                      11:00 WIB - Selesai
+                    </p>
+                  </div>
                 </div>
               </div>
               
-              <div className="flex items-start bg-white/50 rounded-2xl p-4">
-                <MapPin className="w-6 h-6 text-rose-600 mr-4 mt-1 flex-shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-slate-800">Masjid Agung Cirebon</p>
-                  <p className="text-slate-600 text-sm break-words">Jl. Lemahwungkuk No.1, Cirebon</p>
+              <div className="flex-1 backdrop-blur-xl bg-white/30 rounded-3xl p-8 hover:scale-102 transition-all duration-500 border border-white/50 shadow-xl group">
+                <div className="flex flex-col items-center text-center space-y-6">
+                  <div className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-full p-4 transform group-hover:rotate-12 transition-transform duration-300 shadow-lg">
+                    <MapPin className="w-10 h-10 text-white" />
+                  </div>
+                  <div className="space-y-4">
+                    <h4 className="font-bold text-2xl md:text-3xl bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                      Rumah Mempelai Wanita
+                    </h4>
+                    <div className="h-1 w-20 mx-auto bg-gradient-to-r from-rose-400 to-orange-400 rounded-full"></div>
+                    <div className="space-y-2">
+                      <p className="text-slate-600 text-lg leading-relaxed">
+                        Dusun IV RT 03/07 Desa Dukuh
+                      </p>
+                      <p className="text-slate-600 text-lg leading-relaxed">
+                        Kec. Kapetakan, Kab. Cirebon
+                      </p>
+                      <p className="text-slate-600 text-lg leading-relaxed">
+                        Jawa Barat 45152
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-              <Button
-                onClick={() => handleOpenMaps('Masjid Agung Cirebon')}
-                className="w-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white rounded-2xl"
-              >
-                <MapPin className="w-4 h-4 mr-2" />
-                Lihat Lokasi
-              </Button>
             </div>
           </div>
 
-          {/* Resepsi */}
-          <div className="bg-gradient-to-br from-amber-100 to-orange-100 rounded-3xl p-6 shadow-lg border border-amber-200 transform transition-all duration-300 hover:scale-105">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-amber-700 mb-2 font-elegant">Resepsi</h3>
-              <div className="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full"></div>
+          {/* Google Maps Section */}
+          <div className="backdrop-blur-md bg-white/30 rounded-3xl p-8 md:p-12 animate-fadeInUp border border-white/40 shadow-lg" style={{ animationDelay: '0.2s' }}>
+            <div className="text-center mb-12">
+              <h3 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 font-elegant gradient-text animate-shimmer">Lokasi Acara</h3>
+              <div className="w-32 h-2 bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 mx-auto rounded-full animate-shimmer"></div>
             </div>
             
-            <div className="space-y-4">
-              <div className="flex items-center bg-white/50 rounded-2xl p-4">
-                <Calendar className="w-6 h-6 text-amber-600 mr-4 flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-slate-800">Minggu, 13 Juli 2025</p>
-                  <p className="text-slate-600 text-sm">18:00 - 22:00 WIB</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start bg-white/50 rounded-2xl p-4">
-                <MapPin className="w-6 h-6 text-amber-600 mr-4 mt-1 flex-shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-slate-800">Gedung Serbaguna Cirebon</p>
-                  <p className="text-slate-600 text-sm break-words">Jl. Tuparev No.456, Cirebon</p>
-                </div>
-              </div>
-              
-              <Button
-                onClick={() => handleOpenMaps('Gedung Serbaguna Cirebon')}
-                className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white rounded-2xl"
-              >
-                <MapPin className="w-4 h-4 mr-2" />
-                Lihat Lokasi
-              </Button>
+            {/* Google Maps Embed */}
+            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/60 mb-8 transform hover:scale-[1.02] transition-transform duration-300">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.4840370790566!2d108.5067742!3d-6.586595399999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ee7bdfd085e47%3A0xdded00f038e34712!2sALGHIFARI%20TAILOR!5e0!3m2!1sid!2sid!4v1750318482502!5m2!1sid!2sid" 
+                width="100%" 
+                height="450" 
+                style={{border: 0}} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full"
+              ></iframe>
             </div>
-          </div>
-        </div>
-
-        {/* Additional Info */}
-        <div className="text-center mt-12">
-          <div className="bg-white/80 backdrop-blur-md rounded-3xl p-6 max-w-md mx-auto shadow-lg border border-white/50">
-            <h4 className="text-xl font-bold text-slate-800 mb-4 font-elegant">Dress Code</h4>
-            <p className="text-base text-slate-600 mb-6">
-              Batik atau Formal
-            </p>
-            <p className="text-sm text-slate-500 mb-6">
-              (Mohon hindari warna putih dan krem)
-            </p>
             
-            <Button
-              onClick={handleSaveToCalendar}
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-2xl"
+            {/* Navigation Button */}
+            <ShinyButton
+              onClick={handleOpenMaps}
+              className="w-full bg-white/90 hover:bg-white text-rose-600 border border-rose-200 shadow-sm 
+              py-4 px-6 text-lg font-medium rounded-2xl hover:shadow-md
+              transition-all duration-300 ease-in-out
+              flex items-center justify-center gap-3"
             >
-              <Calendar className="w-4 h-4 mr-2" />
-              Simpan ke Kalender
-            </Button>
+              <Navigation className="w-5 h-5 text-rose-500" strokeWidth={2} />
+              <span className="bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent">
+                Buka di Google Maps
+              </span>
+            </ShinyButton>
+          </div>
+
+          {/* Additional Info */}
+          <div className="backdrop-blur-md bg-white/30 rounded-3xl p-8 md:p-12 animate-fadeInUp border border-white/40 shadow-lg" style={{ animationDelay: '0.4s' }}>
+            <div className="text-center mb-12">
+              <h3 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 font-elegant gradient-text animate-shimmer">Informasi Tambahan</h3>
+              <div className="w-32 h-2 bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 mx-auto rounded-full animate-shimmer"></div>
+            </div>
+            
+            <ShinyButton
+              onClick={handleSaveToCalendar}
+              className="w-full bg-white/90 hover:bg-white text-rose-600 border border-rose-200 shadow-sm 
+              py-4 px-6 text-lg font-medium rounded-2xl hover:shadow-md
+              transition-all duration-300 ease-in-out
+              flex items-center justify-center gap-3"
+            >
+              <Calendar className="w-5 h-5 text-rose-500" strokeWidth={2} />
+              <span className="bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent">
+                Simpan ke Kalender
+              </span>
+            </ShinyButton>
           </div>
         </div>
       </div>

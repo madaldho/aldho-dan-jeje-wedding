@@ -1,7 +1,7 @@
 
-import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { ShinyButton } from '@/components/ui/shiny-button';
 import { Gift, Copy, CreditCard, Smartphone, Heart, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
@@ -55,19 +55,9 @@ const DigitalGift = () => {
       {/* Background Pattern */}
       <div className="absolute inset-0">
         {[...Array(20)].map((_, i) => (
-          <motion.div
+          <div
             key={i}
-            className="absolute"
-            animate={{
-              scale: [1, 1.3, 1],
-              rotate: [0, 180, 360],
-              opacity: [0.1, 0.4, 0.1]
-            }}
-            transition={{
-              duration: 10 + i * 0.5,
-              repeat: Infinity,
-              delay: i * 0.3
-            }}
+            className="absolute opacity-20"
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
@@ -78,189 +68,98 @@ const DigitalGift = () => {
             ) : (
               <Sparkles className="text-orange-300" size={16} />
             )}
-          </motion.div>
+          </div>
         ))}
       </div>
 
-      <div className="container mx-auto max-w-md relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
-          <motion.div
-            animate={{ 
-              rotate: [0, 10, -10, 0],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="inline-block mb-6"
-          >
-            <div className="relative">
-              <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center shadow-2xl">
-                <Gift className="w-8 h-8 text-white" />
-              </div>
-              <motion.div
-                className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              >
-                <Sparkles className="w-3 h-3 text-white" />
-              </motion.div>
+      <div className="container mx-auto max-w-4xl relative z-10">
+        <div className="text-center mb-12">
+          <div className="flex justify-center mb-6">
+            <div className="bg-gradient-to-br from-pink-500 to-rose-500 p-4 rounded-full shadow-lg">
+              <Gift className="text-white" size={32} />
             </div>
-          </motion.div>
+          </div>
           
-          <h2 className="text-3xl font-bold text-gray-800 mb-4 font-elegant">
+          <h2 className="text-4xl font-bold mb-4 text-slate-800 font-elegant">
             Amplop Digital
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            Doa restu Anda adalah kado terindah bagi kami. Namun jika ingin memberikan kado, 
-            kami menyediakan amplop digital berikut:
+          
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Doa restu Anda adalah hadiah yang paling berharga bagi kami. Namun jika ingin memberikan hadiah, 
+            Anda dapat mengirimkannya melalui:
           </p>
-        </motion.div>
+        </div>
 
-        <div className="space-y-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {accounts.map((account, index) => {
-            const Icon = account.icon;
-            
+            const IconComponent = account.icon;
             return (
-              <motion.div
-                key={account.id}
-                initial={{ opacity: 0, y: 30, rotateX: 15 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.15,
-                  type: "spring",
-                  stiffness: 200
-                }}
-                whileHover={{ 
-                  scale: 1.02,
-                  rotateY: 5,
-                  transition: { duration: 0.2 }
-                }}
-                whileTap={{ scale: 0.98 }}
+              <Card 
+                key={account.id} 
+                className="group hover:shadow-xl transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm overflow-hidden"
               >
-                <Card className="relative overflow-hidden border-0 shadow-2xl bg-white/20 backdrop-blur-xl">
-                  {/* Glass morphism background with gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${account.bgGradient}`} />
-                  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
-                  
-                  {/* Animated background pattern */}
-                  <div className="absolute inset-0 opacity-20">
-                    {[...Array(6)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 bg-white rounded-full"
-                        animate={{
-                          x: [0, 50, 0],
-                          y: [0, 30, 0],
-                          opacity: [0, 1, 0]
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          delay: i * 0.7,
-                          ease: "easeInOut"
-                        }}
-                        style={{
-                          top: `${20 + i * 15}%`,
-                          left: `${10 + i * 10}%`,
-                        }}
-                      />
-                    ))}
+                <CardContent className="p-6">
+                  <div className={`bg-gradient-to-br ${account.bgGradient} rounded-2xl p-4 mb-4 relative overflow-hidden`}>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className={`bg-gradient-to-br ${account.color} p-2 rounded-lg shadow-lg`}>
+                        <IconComponent className="text-white" size={20} />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-slate-600 font-medium">{account.bank}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="text-sm font-semibold text-slate-800">{account.name}</div>
+                      <div className="text-lg font-bold text-slate-900 tracking-wider">{account.number}</div>
+                    </div>
+                    
+                    <div className="absolute top-2 right-2 opacity-10">
+                      <Heart size={40} className="text-slate-600" />
+                    </div>
                   </div>
                   
-                  <CardContent className="p-6 relative">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <motion.div 
-                          className={`p-4 rounded-2xl bg-gradient-to-r ${account.color} shadow-xl`}
-                          whileHover={{ rotate: 10, scale: 1.1 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          <Icon className="w-6 h-6 text-white" />
-                        </motion.div>
-                        
-                        <div>
-                          <h3 className="font-bold text-gray-800 text-lg mb-1 font-elegant">
-                            {account.bank}
-                          </h3>
-                          <p className="text-gray-700 text-sm mb-2">
-                            {account.name}
-                          </p>
-                          <motion.p 
-                            className="font-mono text-lg font-bold text-gray-800"
-                            whileHover={{ scale: 1.05 }}
-                          >
-                            {account.number}
-                          </motion.p>
-                        </div>
-                      </div>
-                      
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Button
-                          onClick={() => copyToClipboard(account.number, account.id)}
-                          className={`bg-gradient-to-r ${account.color} hover:shadow-xl transition-all duration-300 text-white rounded-xl border-0 shadow-lg`}
-                          size="sm"
-                        >
-                          {copiedAccount === account.id ? (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="flex items-center"
-                            >
-                              <Heart className="w-4 h-4 mr-1" />
-                              Tersalin
-                            </motion.div>
-                          ) : (
-                            <>
-                              <Copy className="w-4 h-4 mr-1" />
-                              Salin
-                            </>
-                          )}
-                        </Button>
-                      </motion.div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                  <Button
+                    onClick={() => copyToClipboard(account.number, account.id)}
+                    className={`w-full bg-gradient-to-r ${account.color} hover:shadow-lg transition-all duration-300 text-white border-0 group-hover:scale-105`}
+                    size="sm"
+                  >
+                    <Copy className="mr-2" size={16} />
+                    {copiedAccount === account.id ? 'Tersalin!' : 'Salin Nomor'}
+                  </Button>
+                </CardContent>
+              </Card>
             );
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-10 p-6 bg-white/20 backdrop-blur-xl rounded-3xl border border-white/30 shadow-2xl"
-        >
-          <div className="text-center">
-            <motion.div
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <Heart className="w-8 h-8 text-pink-500 mx-auto mb-4" />
-            </motion.div>
-            
-            <div className="text-lg mb-3 font-arabic text-pink-700">
-              وَمَن تَطَوَّعَ خَيْرًا فَهُوَ خَيْرٌ لَّهُ
+        <div className="text-center">
+          <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-rose-200/50 max-w-2xl mx-auto">
+            <div className="flex justify-center mb-4">
+              <div className="bg-gradient-to-br from-rose-500 to-pink-500 p-3 rounded-full">
+                <Heart className="text-white" size={24} />
+              </div>
             </div>
-            <p className="text-gray-700 text-sm leading-relaxed italic mb-3">
-              "Barangsiapa yang dengan sukarela mengerjakan kebaikan, maka itu lebih baik baginya"
+            
+            <h3 className="text-2xl font-bold mb-4 text-slate-800 font-elegant">
+              Terima Kasih
+            </h3>
+            
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Kehadiran dan doa restu Anda sudah merupakan hadiah yang sangat berarti bagi kami. 
+              Semoga Allah SWT membalas kebaikan Anda dengan berlipat ganda.
             </p>
-            <p className="text-pink-600 text-xs font-medium">
-              - QS. Al-Baqarah: 184 -
-            </p>
+            
+            <div className="text-center">
+              <div className="text-sm text-slate-500 italic">
+                "Dan Allah akan membalas orang-orang yang bersyukur"
+              </div>
+              <div className="text-xs text-slate-400 mt-1">
+                (QS. Ali Imran: 144)
+              </div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 const FloralElements = () => {
   const [petals, setPetals] = useState<Array<{ id: number; left: number; delay: number; duration: number }>>([]);
@@ -24,151 +23,67 @@ const FloralElements = () => {
   return (
     <>
       {/* Enhanced Falling Petals */}
-      <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none z-[5] overflow-hidden">
         {petals.map((petal) => (
-          <motion.div
+          <div
             key={petal.id}
-            className="absolute opacity-60"
+            className="absolute opacity-60 animate-bounce"
             style={{
               left: `${petal.left}%`,
               top: '-20px',
-            }}
-            initial={{ y: -20, rotate: 0, opacity: 0 }}
-            animate={{ 
-              y: window.innerHeight + 20, 
-              rotate: 360,
-              opacity: [0, 0.6, 0.6, 0],
-              x: [0, Math.sin(petal.id) * 50, Math.cos(petal.id) * 30]
-            }}
-            transition={{
-              duration: petal.duration,
-              delay: petal.delay,
-              ease: "linear",
-              repeat: Infinity
+              animationDelay: `${petal.delay}s`,
+              animationDuration: `${petal.duration}s`
             }}
           >
             <div
-              className="w-3 h-3 md:w-4 md:h-4"
+              className="w-3 h-3 md:w-4 md:h-4 animate-spin"
               style={{
                 background: 'linear-gradient(45deg, #fda4af, #f9a8d4, #fdba74)',
                 borderRadius: '50% 0 50% 50%',
                 transform: 'rotate(45deg)',
               }}
             />
-          </motion.div>
+          </div>
         ))}
       </div>
 
-      {/* 3D Floating Flowers */}
-      <div className="fixed inset-0 pointer-events-none z-5">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{
-              top: `${20 + i * 10}%`,
-              left: `${10 + i * 12}%`,
-            }}
-            animate={{
-              rotateY: [0, 360],
-              rotateX: [0, 180],
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3]
-            }}
-            transition={{
-              duration: 8 + i,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.5
-            }}
-          >
-            <div 
-              className="w-8 h-8 md:w-12 md:h-12 rounded-full opacity-20"
-              style={{
-                background: `linear-gradient(${45 + i * 30}deg, #fda4af, #f9a8d4, #fdba74)`,
-                borderRadius: '50% 30% 50% 30%',
-                filter: 'blur(1px)'
-              }}
-            />
-          </motion.div>
-        ))}
+      {/* Decorative Corner Elements */}
+      <div className="fixed top-0 left-0 w-32 h-32 pointer-events-none z-5">
+        <div className="absolute top-4 left-4 w-8 h-8 bg-gradient-to-br from-pink-300/30 to-rose-300/30 rounded-full blur-sm animate-pulse" />
+        <div className="absolute top-8 left-12 w-6 h-6 bg-gradient-to-br from-orange-300/30 to-pink-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-16 left-6 w-4 h-4 bg-gradient-to-br from-rose-300/30 to-pink-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
-      {/* Corner Decorative Flowers with 3D effect */}
-      <motion.div 
-        className="fixed top-0 left-0 w-24 h-24 md:w-32 md:h-32 opacity-20 pointer-events-none"
-        animate={{
-          rotateY: [0, 180, 360],
-          scale: [1, 1.1, 1]
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <div 
-          className="w-full h-full bg-gradient-to-br from-rose-300 to-pink-300 rounded-full" 
-          style={{ borderRadius: '50% 30% 50% 30%' }} 
-        />
-      </motion.div>
-      
-      <motion.div 
-        className="fixed top-0 right-0 w-20 h-20 md:w-24 md:h-24 opacity-20 pointer-events-none"
-        animate={{
-          rotateY: [360, 180, 0],
-          scale: [1, 1.2, 1]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      >
-        <div 
-          className="w-full h-full bg-gradient-to-bl from-amber-300 to-orange-300 rounded-full" 
-          style={{ borderRadius: '30% 50% 30% 50%' }} 
-        />
-      </motion.div>
+      <div className="fixed top-0 right-0 w-32 h-32 pointer-events-none z-5">
+        <div className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-bl from-pink-300/30 to-rose-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute top-8 right-12 w-6 h-6 bg-gradient-to-bl from-orange-300/30 to-pink-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute top-16 right-6 w-4 h-4 bg-gradient-to-bl from-rose-300/30 to-pink-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '2.5s' }} />
+      </div>
 
-      <motion.div 
-        className="fixed bottom-0 left-0 w-24 h-24 md:w-28 md:h-28 opacity-20 pointer-events-none"
-        animate={{
-          rotateX: [0, 180, 360],
-          scale: [1, 1.3, 1]
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      >
-        <div 
-          className="w-full h-full bg-gradient-to-tr from-pink-300 to-rose-300 rounded-full" 
-          style={{ borderRadius: '50% 30% 50% 30%' }} 
-        />
-      </motion.div>
+      <div className="fixed bottom-0 left-0 w-32 h-32 pointer-events-none z-5">
+        <div className="absolute bottom-4 left-4 w-8 h-8 bg-gradient-to-tr from-pink-300/30 to-rose-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-8 left-12 w-6 h-6 bg-gradient-to-tr from-orange-300/30 to-pink-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '3.5s' }} />
+        <div className="absolute bottom-16 left-6 w-4 h-4 bg-gradient-to-tr from-rose-300/30 to-pink-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '4s' }} />
+      </div>
 
-      <motion.div 
-        className="fixed bottom-0 right-0 w-16 h-16 md:w-20 md:h-20 opacity-20 pointer-events-none"
-        animate={{
-          rotateZ: [0, 360],
-          scale: [1, 1.4, 1]
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 3
-        }}
-      >
-        <div 
-          className="w-full h-full bg-gradient-to-tl from-orange-300 to-amber-300 rounded-full" 
-          style={{ borderRadius: '30% 50% 30% 50%' }} 
-        />
-      </motion.div>
+      <div className="fixed bottom-0 right-0 w-32 h-32 pointer-events-none z-5">
+        <div className="absolute bottom-4 right-4 w-8 h-8 bg-gradient-to-tl from-pink-300/30 to-rose-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '4.5s' }} />
+        <div className="absolute bottom-8 right-12 w-6 h-6 bg-gradient-to-tl from-orange-300/30 to-pink-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '5s' }} />
+        <div className="absolute bottom-16 right-6 w-4 h-4 bg-gradient-to-tl from-rose-300/30 to-pink-300/30 rounded-full blur-sm animate-pulse" style={{ animationDelay: '5.5s' }} />
+      </div>
+
+      {/* Floating Hearts */}
+      <div className="fixed inset-0 pointer-events-none z-5 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-6 h-6 text-pink-300/40 animate-bounce" style={{ animationDelay: '6s', animationDuration: '3s' }}>
+          ♥
+        </div>
+        <div className="absolute top-3/4 right-1/4 w-6 h-6 text-rose-300/40 animate-bounce" style={{ animationDelay: '7s', animationDuration: '4s' }}>
+          ♥
+        </div>
+        <div className="absolute top-1/2 left-3/4 w-6 h-6 text-orange-300/40 animate-bounce" style={{ animationDelay: '8s', animationDuration: '5s' }}>
+          ♥
+        </div>
+      </div>
     </>
   );
 };

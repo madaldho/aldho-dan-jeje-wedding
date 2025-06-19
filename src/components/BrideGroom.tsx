@@ -1,238 +1,165 @@
 
-import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-import { Heart, Flower, Instagram, MapPin } from 'lucide-react';
+import { Heart, Flower, MapPin } from 'lucide-react';
 
 const BrideGroom = () => {
   const bride = {
-    name: "Jessica Amelia",
-    fullName: "Jessica Amelia Putri",
+    name: "Nur Azizah",
+    fullName: "Nur Azizah",
     nickname: "Jeje",
-    parents: "Putri dari Bapak Budi Santoso & Ibu Dewi Sari",
+    parents: "Putri dari Bpk. Tahudin, S. Pd, SD & Ibu Nur Fathiya",
     image: "https://images.unsplash.com/photo-1494790108755-2616c27de5c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    instagram: "@jeje_cantika",
-    location: "Jakarta"
+    
+    
   };
 
   const groom = {
-    name: "Aldho Ramadhan",
-    fullName: "Aldho Ramadhan Putra",
+    name: "Muhamad Ali Ridho, S. Pd",
+    fullName: "Muhamad Ali Ridho, S. Pd",
     nickname: "Aldho",
-    parents: "Putra dari Bapak Ahmad Wijaya & Ibu Siti Nurhaliza",
+    parents: "Putra dari Bpk. Ahmad Muhtar, S. Pd. I & Ibu Nuraeni, S. Pd.I",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    instagram: "@aldho_rama",
-    location: "Cirebon"
+   
   };
 
   return (
-    <section id="bride-groom" className="py-20 px-4 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 relative overflow-hidden">
-      {/* Background Pattern */}
+    <section id="bride-groom" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 relative overflow-hidden">
+      {/* Enhanced Background Pattern */}
       <div className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/8 via-rose-500/6 to-orange-500/8 animate-gradient-shift"></div>
+        {[...Array(20)].map((_, i) => (
+          <div
             key={i}
-            className="absolute"
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-              opacity: [0.1, 0.3, 0.1]
-            }}
-            transition={{
-              duration: 8 + i * 0.5,
-              repeat: Infinity,
-              delay: i * 0.3
-            }}
+            className="absolute animate-float"
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.4}s`
             }}
           >
-            <Heart className="text-pink-300" size={16} />
-          </motion.div>
+            <Heart className="text-pink-300/60" size={Math.random() > 0.5 ? 16 : 12} />
+          </div>
         ))}
       </div>
 
-      <div className="container mx-auto max-w-md relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
-          <motion.div
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="inline-block mb-4"
-          >
-            <Heart className="w-12 h-12 text-pink-500 mx-auto" />
-          </motion.div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-4 font-elegant">
+      <div className="container mx-auto max-w-4xl relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-6 animate-bounce">
+            <Heart className="w-16 h-16 text-pink-500 mx-auto animate-pulse" />
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-elegant gradient-text animate-shimmer">
             Mempelai
           </h2>
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-gray-600 text-lg md:text-xl leading-relaxed font-medium max-w-3xl mx-auto">
             Dengan rahmat Allah SWT, kami bermaksud menyelenggarakan syukuran pernikahan putra-putri kami
           </p>
-        </motion.div>
+        </div>
 
-        <div className="space-y-8">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
           {/* Groom Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <Card className="relative overflow-hidden border-0 shadow-2xl bg-white/20 backdrop-blur-xl">
-              {/* Glass morphism background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-orange-500/10" />
+          <div className="transform transition-all duration-500 hover:scale-[1.02] animate-fadeInLeft">
+            <div className="glass-card p-6 md:p-8 h-full">
+              {/* Enhanced Glass morphism background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-orange-500/8 animate-gradient-shift" />
               
-              <CardContent className="p-6 relative">
-                <div className="text-center">
-                  <motion.div
-                    className="relative inline-block mb-6"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white/50 shadow-2xl">
+              <div className="text-center relative">
+                  <div className="relative inline-block mb-8 hover:scale-105 transition-transform duration-500">
+                    <div className="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden border-4 border-white/60 shadow-lg">
                       <img 
                         src={groom.image} 
                         alt={groom.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                       />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full p-2">
-                      <Heart className="w-4 h-4 text-white" />
+                    <div className="absolute -bottom-3 -right-3 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full p-3 animate-pulse">
+                      <Heart className="w-5 h-5 text-white" />
                     </div>
-                  </motion.div>
+                  </div>
                   
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-gray-800 font-elegant">
+                  <div className="space-y-4">
+                    <h3 className="text-3xl md:text-4xl font-bold text-gray-800 font-elegant gradient-text animate-shimmer">
                       {groom.name}
                     </h3>
-                    <p className="text-lg text-gray-700 font-medium">
+                    <p className="text-xl md:text-2xl text-gray-700 font-medium">
                       ({groom.nickname})
                     </p>
-                    <p className="text-sm text-gray-600 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-sm mx-auto">
                       {groom.parents}
                     </p>
                     
-                    <div className="flex items-center justify-center space-x-4 pt-4">
-                      <div className="flex items-center space-x-1 text-pink-600">
-                        <Instagram className="w-4 h-4" />
-                        <span className="text-sm">{groom.instagram}</span>
-                      </div>
-                      <div className="flex items-center space-x-1 text-orange-600">
-                        <MapPin className="w-4 h-4" />
-                        <span className="text-sm">{groom.location}</span>
-                      </div>
+                    <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 pt-6">
+                      
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+               </div>
+          </div>
 
-          {/* Heart Divider */}
-          <motion.div
-            className="flex items-center justify-center py-4"
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <div className="flex items-center space-x-4">
-              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-pink-300"></div>
-              <motion.div
-                animate={{ rotate: [0, 360], scale: [1, 1.2, 1] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="bg-gradient-to-r from-pink-500 to-orange-500 rounded-full p-3"
-              >
-                <Heart className="w-6 h-6 text-white" />
-              </motion.div>
-              <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-orange-300"></div>
+          {/* Decorative Divider - Hidden on desktop, visible on mobile */}
+          <div className="md:hidden flex items-center justify-center py-8">
+            <div className="flex items-center space-x-6">
+              <div className="w-20 h-px bg-gradient-to-r from-transparent to-pink-400"></div>
+              <div className="bg-gradient-to-r from-pink-500 to-orange-500 rounded-full p-4 shadow-lg animate-pulse">
+                <Heart className="w-8 h-8 text-white" />
+              </div>
+              <div className="w-20 h-px bg-gradient-to-l from-transparent to-pink-400"></div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Bride Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <Card className="relative overflow-hidden border-0 shadow-2xl bg-white/20 backdrop-blur-xl">
-              {/* Glass morphism background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-pink-500/10" />
+          <div className="transform transition-all duration-500 hover:scale-[1.02] animate-fadeInRight">
+            <div className="glass-card p-6 md:p-8 h-full">
+              {/* Enhanced Glass morphism background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-pink-500/8 animate-gradient-shift" />
               
-              <CardContent className="p-6 relative">
-                <div className="text-center">
-                  <motion.div
-                    className="relative inline-block mb-6"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white/50 shadow-2xl">
+              <div className="text-center relative">
+                  <div className="relative inline-block mb-8 hover:scale-105 transition-transform duration-500">
+                    <div className="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full overflow-hidden border-4 border-white/60 shadow-lg">
                       <img 
                         src={bride.image} 
                         alt={bride.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                       />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full p-2">
-                      <Flower className="w-4 h-4 text-white" />
+                    <div className="absolute -bottom-3 -right-3 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full p-3 animate-pulse">
+                      <Heart className="w-5 h-5 text-white" />
                     </div>
-                  </motion.div>
+                  </div>
                   
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-gray-800 font-elegant">
+                  <div className="space-y-4">
+                    <h3 className="text-3xl md:text-4xl font-bold text-gray-800 font-elegant gradient-text animate-shimmer">
                       {bride.name}
                     </h3>
-                    <p className="text-lg text-gray-700 font-medium">
+                    <p className="text-xl md:text-2xl text-gray-700 font-medium">
                       ({bride.nickname})
                     </p>
-                    <p className="text-sm text-gray-600 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-sm mx-auto">
                       {bride.parents}
                     </p>
                     
-                    <div className="flex items-center justify-center space-x-4 pt-4">
-                      <div className="flex items-center space-x-1 text-pink-600">
-                        <Instagram className="w-4 h-4" />
-                        <span className="text-sm">{bride.instagram}</span>
-                      </div>
-                      <div className="flex items-center space-x-1 text-orange-600">
-                        <MapPin className="w-4 h-4" />
-                        <span className="text-sm">{bride.location}</span>
-                      </div>
+                    <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 pt-6">
+                      
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+
+            </div>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-12 p-6 bg-white/20 backdrop-blur-xl rounded-2xl border border-white/30"
-        >
-          <div className="text-center">
-            <div className="text-lg mb-3 font-arabic text-pink-700">
-              وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجاً لِّتَسْكُنُوا إِلَيْهَا
+        <div className="mt-16 mx-4 md:mx-8">
+
+          <div className="glass-card p-8 md:p-12 text-center">
+            <div className="max-w-4xl mx-auto">
+              <p className="text-gray-700 text-lg md:text-xl leading-relaxed italic font-medium mb-6">
+                "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya"
+              </p>
+              <p className="text-pink-600 text-base md:text-lg font-bold gradient-text animate-shimmer">
+                - QS. Ar-Rum: 21 -
+              </p>
             </div>
-            <p className="text-gray-700 text-sm leading-relaxed italic">
-              "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya"
-            </p>
-            <p className="text-pink-600 text-xs mt-2 font-medium">
-              - QS. Ar-Rum: 21 -
-            </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

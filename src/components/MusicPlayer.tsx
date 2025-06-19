@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Pause } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -51,62 +50,29 @@ const MusicPlayer = () => {
         preload="auto"
       />
       
-      <motion.div 
-        className="fixed top-4 right-4 z-50"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-      >
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
+      <div className="fixed top-4 right-4 z-50 animate-fade-in">
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+          
           <Button
             onClick={toggleMusic}
-            className="bg-white/90 backdrop-blur-xl hover:bg-white text-pink-600 rounded-full w-12 h-12 shadow-2xl border border-white/50 transition-all duration-300"
             size="icon"
+            className="relative bg-white/90 backdrop-blur-sm hover:bg-white text-pink-600 hover:text-pink-700 rounded-full shadow-lg border border-white/50 transition-all duration-300 hover:scale-110"
           >
-            <motion.div
-              key={isPlaying ? 'pause' : 'play'}
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {isPlaying ? (
-                <Pause className="w-5 h-5" />
-              ) : (
-                <Play className="w-5 h-5 ml-0.5" />
-              )}
-            </motion.div>
+            {isPlaying ? (
+              <Pause className="w-5 h-5" />
+            ) : (
+              <Play className="w-5 h-5 ml-0.5" />
+            )}
           </Button>
-        </motion.div>
-        
-        {/* Music wave animation - minimal */}
-        {isPlaying && (
-          <motion.div 
-            className="absolute -bottom-1 -right-1 flex items-end gap-0.5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="w-0.5 bg-pink-500 rounded-full"
-                animate={{
-                  height: [2, 6, 2],
-                }}
-                transition={{
-                  duration: 0.8,
-                  repeat: Infinity,
-                  delay: i * 0.1,
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-          </motion.div>
-        )}
-      </motion.div>
+          
+          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="bg-black/80 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+              {isPlaying ? 'Pause Music' : 'Play Music'}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
