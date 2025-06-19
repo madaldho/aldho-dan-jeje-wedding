@@ -13,7 +13,7 @@ import Wishes from '../components/Wishes';
 import DigitalGift from '../components/DigitalGift';
 import Contact from '../components/Contact';
 import MusicPlayer from '../components/MusicPlayer';
-import Navigation from '../components/Navigation';
+import TabNavigation from '../components/TabNavigation';
 import FloralElements from '../components/FloralElements';
 
 const Index = () => {
@@ -40,18 +40,18 @@ const Index = () => {
 
   return (
     <motion.div 
-      className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-amber-50 relative overflow-hidden"
+      className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 relative overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
       <FloralElements />
-      <Navigation />
       <MusicPlayer />
+      <TabNavigation />
       
-      <motion.div className="scroll-snap-y">
+      <motion.div className="pb-20">
         <motion.div 
-          className="scroll-snap-start"
+          id="hero"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -60,7 +60,7 @@ const Index = () => {
         </motion.div>
         
         <motion.div 
-          className="scroll-snap-start"
+          id="countdown"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -70,7 +70,7 @@ const Index = () => {
         </motion.div>
         
         <motion.div 
-          className="scroll-snap-start"
+          id="event-details"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -80,7 +80,7 @@ const Index = () => {
         </motion.div>
         
         <motion.div 
-          className="scroll-snap-start"
+          id="love-story"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -90,7 +90,7 @@ const Index = () => {
         </motion.div>
         
         <motion.div 
-          className="scroll-snap-start"
+          id="gallery"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -100,7 +100,7 @@ const Index = () => {
         </motion.div>
         
         <motion.div 
-          className="scroll-snap-start"
+          id="rsvp"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -110,7 +110,7 @@ const Index = () => {
         </motion.div>
         
         <motion.div 
-          className="scroll-snap-start"
+          id="wishes"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -120,7 +120,7 @@ const Index = () => {
         </motion.div>
         
         <motion.div 
-          className="scroll-snap-start"
+          id="digital-gift"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -130,7 +130,7 @@ const Index = () => {
         </motion.div>
         
         <motion.div 
-          className="scroll-snap-start"
+          id="contact"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -141,7 +141,7 @@ const Index = () => {
       </motion.div>
       
       <motion.footer 
-        className="bg-gradient-to-r from-rose-900 to-pink-900 text-white py-8 text-center relative"
+        className="bg-gradient-to-r from-pink-600 via-rose-600 to-orange-600 text-white py-6 text-center relative"
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
