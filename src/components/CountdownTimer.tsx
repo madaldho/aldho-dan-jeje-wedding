@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { Flower } from 'lucide-react';
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -10,8 +11,7 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    // Set wedding date (change this to actual wedding date)
-    const weddingDate = new Date('2024-12-25T10:00:00').getTime();
+    const weddingDate = new Date('2025-07-13T11:00:00').getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -31,35 +31,54 @@ const CountdownTimer = () => {
   }, []);
 
   return (
-    <section id="countdown" className="py-20 bg-gradient-to-r from-rose-100 to-amber-100">
-      <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-800">
-          Menuju Hari Bahagia
-        </h2>
-        <p className="text-xl mb-12 text-slate-600">
-          Waktu yang tersisa hingga hari istimewa kami
-        </p>
+    <section id="countdown" className="py-16 bg-gradient-to-br from-rose-100 via-pink-100 to-amber-100 relative">
+      <div className="absolute inset-0 opacity-10">
+        <div 
+          className="w-full h-full bg-cover bg-center"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")'
+          }}
+        />
+      </div>
+      
+      <div className="container mx-auto px-6 text-center relative z-10">
+        <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/50 max-w-lg mx-auto">
+          <div className="flex justify-center mb-4">
+            <Flower className="text-rose-500 animate-spin" size={32} style={{ animationDuration: '3s' }} />
+          </div>
+          
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-slate-800 font-elegant">
+            Menuju Hari Bahagia
+          </h2>
+          <p className="text-base mb-8 text-slate-600">
+            Waktu tersisa hingga hari istimewa kami
+          </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          {[
-            { label: 'Hari', value: timeLeft.days },
-            { label: 'Jam', value: timeLeft.hours },
-            { label: 'Menit', value: timeLeft.minutes },
-            { label: 'Detik', value: timeLeft.seconds }
-          ].map((item, index) => (
-            <div 
-              key={item.label}
-              className="bg-white/80 backdrop-blur rounded-2xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105 animate-fade-in"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
-              <div className="text-4xl md:text-5xl font-bold text-rose-600 mb-2">
-                {item.value.toString().padStart(2, '0')}
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            {[
+              { label: 'Hari', value: timeLeft.days },
+              { label: 'Jam', value: timeLeft.hours },
+              { label: 'Menit', value: timeLeft.minutes },
+              { label: 'Detik', value: timeLeft.seconds }
+            ].map((item, index) => (
+              <div 
+                key={item.label}
+                className="bg-gradient-to-br from-rose-500 to-pink-500 text-white rounded-2xl p-4 transform transition-all duration-300 hover:scale-105 animate-fade-in shadow-lg"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                <div className="text-2xl md:text-3xl font-bold mb-1">
+                  {item.value.toString().padStart(2, '0')}
+                </div>
+                <div className="text-xs font-semibold opacity-90">
+                  {item.label}
+                </div>
               </div>
-              <div className="text-lg font-semibold text-slate-700">
-                {item.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          
+          <div className="text-sm text-slate-600 font-medium">
+            13 Juli 2025 • Jam 11:00 WIB
+          </div>
         </div>
       </div>
     </section>

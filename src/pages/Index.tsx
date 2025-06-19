@@ -13,6 +13,7 @@ import DigitalGift from '../components/DigitalGift';
 import Contact from '../components/Contact';
 import MusicPlayer from '../components/MusicPlayer';
 import Navigation from '../components/Navigation';
+import FloralElements from '../components/FloralElements';
 
 const Index = () => {
   const [showInvitation, setShowInvitation] = useState(false);
@@ -20,7 +21,6 @@ const Index = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Extract guest name from URL parameter
     const urlParams = new URLSearchParams(location.search);
     const toParam = urlParams.get('to');
     if (toParam) {
@@ -38,7 +38,8 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-amber-50 relative">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-amber-50 relative overflow-hidden">
+      <FloralElements />
       <Navigation />
       <MusicPlayer />
       
@@ -52,8 +53,11 @@ const Index = () => {
       <DigitalGift />
       <Contact />
       
-      <footer className="bg-slate-800 text-white py-8 text-center">
-        <p className="text-sm opacity-75">© 2024 Wedding Invitation - Made with Love</p>
+      <footer className="bg-gradient-to-r from-rose-900 to-pink-900 text-white py-8 text-center relative">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative z-10">
+          <p className="text-sm opacity-90">© 2024 Aldho & Jeje Wedding - Made with ❤️</p>
+        </div>
       </footer>
     </div>
   );
