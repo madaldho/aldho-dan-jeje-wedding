@@ -23,10 +23,9 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
       onOpenInvitation();
     }, 500);
   };
-
   return (
     <div 
-      className="min-h-screen relative overflow-hidden flex items-center justify-center animate-fadeIn"
+      className="min-h-screen relative overflow-hidden flex items-center justify-center animate-fadeIn wedding-content"
     >
       {/* Animated Background */}
       <div 
@@ -110,9 +109,8 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
           <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
             <p className="text-sm font-light tracking-wide mb-4 opacity-90">
               Kami mengundang Anda untuk berbagi kebahagiaan dalam
-            </p>
-            <h2 
-              className="text-2xl font-bold mb-4 bg-gradient-to-r from-pink-300 to-orange-300 bg-clip-text text-transparent font-elegant animate-pulse"
+            </p>            <h2 
+              className="text-2xl font-bold mb-4 text-pink-300 bg-gradient-to-r from-pink-300 to-orange-300 bg-clip-text gradient-text font-elegant animate-pulse"
             >
               Pernikahan Kami
             </h2>

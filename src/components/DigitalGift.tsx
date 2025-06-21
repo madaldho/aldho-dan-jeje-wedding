@@ -1,41 +1,41 @@
-
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ShinyButton } from '@/components/ui/shiny-button';
-import { Gift, Copy, CreditCard, Smartphone, Heart, Sparkles } from 'lucide-react';
-import { useState } from 'react';
-import { toast } from '@/hooks/use-toast';
+import { Gift, Copy, CreditCard, Smartphone, Heart } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const DigitalGift = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out-cubic',
+      once: true,
+      offset: 100
+    });
+  }, []);
+
+  const { toast } = useToast();
   const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
 
   const accounts = [
     {
-      id: 'bca',
-      bank: 'Bank BCA',
-      name: 'Aldho Ramadhan',
-      number: '1234567890',
+      id: 'bsi',
+      bank: 'Bank BSI',
+      name: 'NUR AZIZAH',
+      number: '7140285972',
       icon: CreditCard,
-      color: 'from-pink-500 to-rose-500',
-      bgGradient: 'from-pink-500/20 to-rose-500/20'
-    },
-    {
-      id: 'mandiri',
-      bank: 'Bank Mandiri',
-      name: 'Jessica Amelia',
-      number: '0987654321',
-      icon: CreditCard,
-      color: 'from-rose-500 to-orange-500',
-      bgGradient: 'from-rose-500/20 to-orange-500/20'
+      color: 'from-yellow-500 to-orange-200',
+      bgGradient: 'from-rose-100 to-pink-100'
     },
     {
       id: 'dana',
       bank: 'DANA',
-      name: 'Aldho & Jeje',
-      number: '081234567890',
+      name: 'Jedo',
+      number: '081387013123',
       icon: Smartphone,
-      color: 'from-orange-500 to-pink-500',
-      bgGradient: 'from-orange-500/20 to-pink-500/20'
+      color: 'from-amber-500 to-orange-500',
+      bgGradient: 'from-amber-100 to-orange-100'
     }
   ];
 
@@ -51,112 +51,67 @@ const DigitalGift = () => {
   };
 
   return (
-    <section id="digital-gift" className="py-20 px-4 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute opacity-20"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-          >
-            {i % 2 === 0 ? (
-              <Gift className="text-pink-300" size={18} />
-            ) : (
-              <Sparkles className="text-orange-300" size={16} />
-            )}
-          </div>
-        ))}
-      </div>
+    <section id="digital-gift" className="py-24 px-4 bg-gradient-to-b from-rose-50 via-pink-50 to-orange-50 relative overflow-hidden">
+      <div className="absolute inset-0 bg-dot-pattern-rose-200/50 [mask-image:radial-gradient(ellipse_at_center,white,transparent_80%)]"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-rose-50 to-transparent"></div>
 
-      <div className="container mx-auto max-w-4xl relative z-10">
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-6">
-            <div className="bg-gradient-to-br from-pink-500 to-rose-500 p-4 rounded-full shadow-lg">
-              <Gift className="text-white" size={32} />
-            </div>
-          </div>
-          
-          <h2 className="text-4xl font-bold mb-4 text-slate-800 font-elegant">
+      <div className="container mx-auto max-w-5xl relative z-10">
+        <div className="text-center mb-16" data-aos="fade-up">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-slate-800 font-elegant gradient-text animate-shimmer">
             Amplop Digital
           </h2>
-          
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Doa restu Anda adalah hadiah yang paling berharga bagi kami. Namun jika ingin memberikan hadiah, 
-            Anda dapat mengirimkannya melalui:
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            Doa restu Anda adalah hadiah terindah. Namun jika ingin memberi tanda kasih, Anda dapat mengirimkannya melalui:
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {accounts.map((account, index) => {
+        <div className="grid md:grid-cols-2 gap-8 mb-16" data-aos="fade-up" data-aos-delay="100">
+          {accounts.map((account) => {
             const IconComponent = account.icon;
             return (
-              <Card 
+              <div 
                 key={account.id} 
-                className="group hover:shadow-xl transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm overflow-hidden"
+                className="bg-white/60 backdrop-blur-lg rounded-2xl shadow-lg border border-white/50 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
-                <CardContent className="p-6">
-                  <div className={`bg-gradient-to-br ${account.bgGradient} rounded-2xl p-4 mb-4 relative overflow-hidden`}>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className={`bg-gradient-to-br ${account.color} p-2 rounded-lg shadow-lg`}>
-                        <IconComponent className="text-white" size={20} />
-                      </div>
-                      <div className="text-right">
-                        <div className="text-xs text-slate-600 font-medium">{account.bank}</div>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <div className="text-sm font-semibold text-slate-800">{account.name}</div>
-                      <div className="text-lg font-bold text-slate-900 tracking-wider">{account.number}</div>
-                    </div>
-                    
-                    <div className="absolute top-2 right-2 opacity-10">
-                      <Heart size={40} className="text-slate-600" />
-                    </div>
+                <div className="flex items-center mb-4">
+                  <div className={`p-3 rounded-full bg-gradient-to-br ${account.bgGradient}`}>
+                    <IconComponent className={`w-6 h-6 bg-clip-text text-transparent bg-gradient-to-r ${account.color}`} />
                   </div>
-                  
-                  <Button
-                    onClick={() => copyToClipboard(account.number, account.id)}
-                    className={`w-full bg-gradient-to-r ${account.color} hover:shadow-lg transition-all duration-300 text-white border-0 group-hover:scale-105`}
-                    size="sm"
-                  >
-                    <Copy className="mr-2" size={16} />
-                    {copiedAccount === account.id ? 'Tersalin!' : 'Salin Nomor'}
-                  </Button>
-                </CardContent>
-              </Card>
+                  <h3 className="ml-4 text-2xl font-semibold text-slate-700 font-elegant">{account.bank}</h3>
+                </div>
+                <div className="text-center bg-rose-50/60 rounded-lg p-4 my-4 border border-rose-100">
+                  <p className="text-slate-600 text-sm">a/n {account.name}</p>
+                  <p className="text-2xl font-bold text-slate-800 tracking-wider my-1">{account.number}</p>
+                </div>
+                <Button
+                  onClick={() => copyToClipboard(account.number, account.id)}
+                  className={`w-full bg-gradient-to-r ${account.color} hover:shadow-lg transition-all duration-300 text-white py-3 h-12 text-base font-semibold rounded-lg shadow-md`}
+                >
+                  <Copy className="mr-2" size={16} />
+                  {copiedAccount === account.id ? 'Tersalin!' : 'Salin Rekening'}
+                </Button>
+              </div>
             );
           })}
         </div>
 
-        <div className="text-center">
-          <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-rose-200/50 max-w-2xl mx-auto">
-            <div className="flex justify-center mb-4">
-              <div className="bg-gradient-to-br from-rose-500 to-pink-500 p-3 rounded-full">
-                <Heart className="text-white" size={24} />
+        <div className="text-center" data-aos="fade-up" data-aos-delay="200">
+          <div className="bg-white/70 backdrop-blur-md rounded-2xl p-6 md:p-8 shadow-lg border border-white/50 max-w-2xl mx-auto transition-all duration-500 hover:shadow-xl">
+            <div className="flex flex-col items-center text-center">
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 via-red-500 to-pink-500 rounded-full flex items-center justify-center shadow-md border-2 border-white/80 animate-heart-beat">
+                  <Heart className="w-8 h-8 text-white" />
+                </div>
               </div>
-            </div>
-            
-            <h3 className="text-2xl font-bold mb-4 text-slate-800 font-elegant">
-              Terima Kasih
-            </h3>
-            
-            <p className="text-slate-600 leading-relaxed mb-6">
-              Kehadiran dan doa restu Anda sudah merupakan hadiah yang sangat berarti bagi kami. 
-              Semoga Allah SWT membalas kebaikan Anda dengan berlipat ganda.
-            </p>
-            
-            <div className="text-center">
-              <div className="text-sm text-slate-500 italic">
-                "Dan Allah akan membalas orang-orang yang bersyukur"
-              </div>
-              <div className="text-xs text-slate-400 mt-1">
-                (QS. Ali Imran: 144)
-              </div>
+              <h3 className="text-3xl md:text-4xl font-bold mb-3 text-slate-800 font-elegant gradient-text">
+                Dengan Penuh Syukur
+              </h3>
+              <div className="w-20 h-0.5 bg-gradient-to-r from-rose-300 to-pink-300 rounded-full my-2"></div>
+              <p className="text-slate-600 text-base leading-relaxed max-w-prose mx-auto">
+                Kehadiran dan untaian doa restu dari Bapak/Ibu/Saudara/i adalah anugerah terindah yang tak ternilai bagi kami.
+                <br className="hidden md:block" />
+                Terima kasih dari hati yang terdalam atas segala bentuk perhatian dan kasih sayang yang telah diberikan.
+              </p>
             </div>
           </div>
         </div>

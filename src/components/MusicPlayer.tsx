@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Pause } from 'lucide-react';
@@ -46,7 +45,7 @@ const MusicPlayer = () => {
     <>
       <audio
         ref={audioRef}
-        src="https://api.our-wedding.link/uploads/866ecb50-3798-11f0-ab97-99e3c95d401a.mp3"
+        src="/audio wedding.mp3"
         preload="auto"
       />
       

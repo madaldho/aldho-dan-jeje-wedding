@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useLayoutEffect, cloneElement } from 'react';
 
 // --- Internal Types and Defaults ---
@@ -12,19 +11,18 @@ export type NavItem = {
   icon: React.ReactElement;
   label?: string;
   onClick?: () => void;
-  sectionId?: string; // Add this for scroll functionality
+  sectionId: string;
 };
 
 const defaultNavItems: NavItem[] = [
-  { id: 'default-home', icon: <DefaultHomeIcon />, label: 'Home' },
-  { id: 'default-explore', icon: <DefaultCompassIcon />, label: 'Explore' },
-  { id: 'default-notifications', icon: <DefaultBellIcon />, label: 'Notifications' },
+  { id: 'default-home', icon: <DefaultHomeIcon />, label: 'Home', sectionId: 'home' },
+  { id: 'default-explore', icon: <DefaultCompassIcon />, label: 'Explore', sectionId: 'explore' },
+  { id: 'default-notifications', icon: <DefaultBellIcon />, label: 'Notifications', sectionId: 'notifications' },
 ];
 
 type LimelightNavProps = {
   items?: NavItem[];
-  defaultActiveIndex?: number;
-  activeIndex?: number;
+  activeLink?: number;
   onTabChange?: (index: number) => void;
   className?: string;
   limelightClassName?: string;
@@ -37,16 +35,13 @@ type LimelightNavProps = {
  */
 export const LimelightNav = ({
   items = defaultNavItems,
-  defaultActiveIndex = 0,
-  activeIndex: controlledActiveIndex,
+  activeLink = 0,
   onTabChange,
   className,
   limelightClassName,
   iconContainerClassName,
   iconClassName,
 }: LimelightNavProps) => {
-  const [internalActiveIndex, setInternalActiveIndex] = useState(defaultActiveIndex);
-  const activeIndex = controlledActiveIndex !== undefined ? controlledActiveIndex : internalActiveIndex;
   const [isReady, setIsReady] = useState(false);
   const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const limelightRef = useRef<HTMLDivElement | null>(null);
@@ -55,7 +50,7 @@ export const LimelightNav = ({
     if (items.length === 0) return;
 
     const limelight = limelightRef.current;
-    const activeItem = navItemRefs.current[activeIndex];
+    const activeItem = navItemRefs.current[activeLink];
     
     if (limelight && activeItem) {
       const newLeft = activeItem.offsetLeft + activeItem.offsetWidth / 2 - limelight.offsetWidth / 2;
@@ -65,54 +60,30 @@ export const LimelightNav = ({
         setTimeout(() => setIsReady(true), 50);
       }
     }
-  }, [activeIndex, isReady, items]);
+  }, [activeLink, isReady, items]);
 
   if (items.length === 0) {
     return null; 
   }
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop;
-      const offset = sectionId === 'hero' ? 0 : 100; // No offset for hero, 100px for others to account for fixed nav
-      
-      window.scrollTo({
-        top: offsetTop - offset,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const handleItemClick = (index: number, item: NavItem) => {
-    if (controlledActiveIndex === undefined) {
-      setInternalActiveIndex(index);
-    }
-    
-    // Handle scroll to section if sectionId is provided
-    if (item.sectionId) {
-      scrollToSection(item.sectionId);
-    }
-    
-    // Update state and trigger callbacks
+  const handleItemClick = (index: number) => {
     onTabChange?.(index);
-    item.onClick?.();
   };
 
   return (
     <nav className={`relative inline-flex items-center h-16 rounded-lg bg-card text-foreground border px-2 ${className}`}>
-      {items.map((item, index) => (
+      {items.map(({ id, icon, label }, index) => (
           <a
-            key={item.id}
+            key={id}
             ref={el => (navItemRefs.current[index] = el)}
             className={`relative z-20 flex h-full cursor-pointer items-center justify-center p-5 ${iconContainerClassName}`}
-            onClick={() => handleItemClick(index, item)}
-            aria-label={item.label}
+            onClick={() => handleItemClick(index)}
+            aria-label={label}
           >
-            {cloneElement(item.icon, {
+            {cloneElement(icon, {
               className: `w-6 h-6 transition-opacity duration-100 ease-in-out ${
-                activeIndex === index ? 'opacity-100' : 'opacity-40'
-              } ${item.icon.props.className || ''} ${iconClassName || ''}`,
+                activeLink === index ? 'opacity-100' : 'opacity-40'
+              } ${icon.props.className || ''} ${iconClassName || ''}`,
             })}
           </a>
       ))}

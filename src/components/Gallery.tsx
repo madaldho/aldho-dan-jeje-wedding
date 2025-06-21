@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,7 +27,7 @@ const Gallery = () => {
     'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
   ];
 
-  const videoUrl = "https://api.our-wedding.link/uploads/866ecb50-3798-11f0-ab97-99e3c95d401a.mp3";
+  const videoUrl = "https://videos.pexels.com/video-files/854251/854251-hd_1280_720_30fps.mp4";
 
   const nextImage = () => {
     setSelectedImage(prev => prev !== null ? (prev + 1) % images.length : 0);
@@ -61,7 +60,7 @@ const Gallery = () => {
         </div>
 
         {/* Photo Gallery */}
-        <div className="mb-24 glass-card p-8 md:p-12">
+        <div className="mb-24 glass-card p-8 md:p-12 rounded-lg">
           <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-800 font-elegant gradient-text animate-shimmer">
             Foto Pre-Wedding
           </h3>
@@ -95,7 +94,7 @@ const Gallery = () => {
         </div>
 
         {/* Video Section */}
-        <div className="glass-card p-8 md:p-12 text-center">
+        <div className="glass-card p-8 md:p-12 text-center rounded-lg">
           <h3 className="text-3xl md:text-4xl font-bold mb-12 text-slate-800 font-elegant gradient-text animate-shimmer">
             Video Pre-Wedding
           </h3>
@@ -107,7 +106,7 @@ const Gallery = () => {
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <div className="glass-card p-4 hover:bg-white/20 transition-all duration-300">
+             
                 <GlareCard className="relative overflow-hidden rounded-2xl shadow-lg">
                   <div className="aspect-video bg-gradient-to-br from-rose-500 via-pink-500 to-orange-500 flex items-center justify-center relative">
                     <div className="absolute inset-0 bg-black/20"></div>
@@ -120,7 +119,7 @@ const Gallery = () => {
                     </div>
                   </div>
                 </GlareCard>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -128,8 +127,14 @@ const Gallery = () => {
 
       {/* Image Modal */}
       {selectedImage !== null && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl w-full">
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div
+            className="relative max-w-4xl w-full cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Button
               variant="ghost"
               size="icon"
@@ -160,7 +165,7 @@ const Gallery = () => {
             <img
               src={images[selectedImage]}
               alt={`Pre-wedding photo ${selectedImage + 1}`}
-              className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+              className="w-full h-auto max-h-[90vh] object-contain rounded-lg"
             />
           </div>
         </div>
@@ -168,18 +173,29 @@ const Gallery = () => {
 
       {/* Video Modal */}
       {selectedVideo && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl w-full">
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
+          onClick={() => setSelectedVideo(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Button
               variant="ghost"
               size="icon"
-              className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
+              className="absolute -top-12 right-0 text-white hover:bg-white/20 z-10"
               onClick={() => setSelectedVideo(null)}
             >
-              <X className="w-5 h-5" />
+              <X className="w-6 h-6" />
             </Button>
-            <div className="aspect-video bg-slate-800 rounded-lg flex items-center justify-center">
-              <p className="text-white">Video akan diputar di sini</p>
+            <div className="aspect-video w-full bg-black rounded-lg overflow-hidden shadow-2xl">
+              <video
+                src={selectedVideo}
+                controls
+                autoPlay
+                className="w-full h-full"
+              />
             </div>
           </div>
         </div>
