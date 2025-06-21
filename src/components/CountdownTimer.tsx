@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Flower, Heart, Stars, Sparkles } from 'lucide-react';
 
@@ -30,14 +31,14 @@ const CountdownTimer = () => {
   }, []);
 
   const timeUnits = [
-    { label: 'Hari', value: timeLeft.days, color: 'from-pink-500 to-rose-500' },
-    { label: 'Jam', value: timeLeft.hours, color: 'from-pink-400 to-rose-400' },
-    { label: 'Menit', value: timeLeft.minutes, color: 'from-pink-300 to-rose-300' },
-    { label: 'Detik', value: timeLeft.seconds, color: 'from-pink-200 to-rose-200' }
+    { label: 'Hari', value: timeLeft.days, color: 'from-purple-500 to-indigo-500' },
+    { label: 'Jam', value: timeLeft.hours, color: 'from-indigo-500 to-violet-500' },
+    { label: 'Menit', value: timeLeft.minutes, color: 'from-violet-500 to-purple-500' },
+    { label: 'Detik', value: timeLeft.seconds, color: 'from-purple-400 to-indigo-400' }
   ];
 
   return (
-    <section id="countdown" className="py-20 md:py-32 px-4 md:px-8 bg-gradient-to-br from-white via-pink-50 to-white relative overflow-hidden">
+    <section id="countdown" className="py-16 md:py-24 px-6 md:px-8 bg-gradient-to-br from-white via-purple-50 to-indigo-50 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div 
@@ -46,14 +47,14 @@ const CountdownTimer = () => {
             backgroundImage: 'url("/luxury-pattern.png")'
           }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(244,114,182,0.1)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(147,51,234,0.1)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
         
-        {/* Animated Pink Particles */}
+        {/* Animated Purple Particles */}
         <div className="absolute inset-0 animate-twinkle">
           {[...Array(20)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-pink-400 rounded-full"
+              className="absolute w-1 h-1 bg-purple-400 rounded-full"
               style={{
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
@@ -65,18 +66,18 @@ const CountdownTimer = () => {
       </div>
       
       <div className="container mx-auto max-w-5xl text-center relative z-10">
-        <div className="backdrop-blur-sm bg-white/80 rounded-3xl border border-pink-200 p-8  shadow-[0_0_50px_rgba(244,114,182,0.2)]">
+        <div className="backdrop-blur-sm bg-white/90 rounded-3xl border border-purple-200 p-8 md:p-12 shadow-[0_0_50px_rgba(147,51,234,0.2)]">
           <div className="flex justify-center items-center gap-4 mb-8">
-            <Stars className="text-pink-500 animate-pulse" size={28} />
-            <Heart className="text-pink-500 animate-bounce" size={32} />
-            <Stars className="text-pink-500 animate-pulse" size={28} />
+            <Stars className="text-purple-500 animate-pulse" size={32} />
+            <Heart className="text-indigo-500 animate-bounce" size={36} />
+            <Stars className="text-purple-500 animate-pulse" size={32} />
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-500 font-serif">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 font-serif">
             Menuju Hari Bahagia
           </h2>
           
-          <p className="text-lg md:text-xl mb-12 text-pink-600/80 font-light">
+          <p className="text-lg md:text-xl mb-12 text-purple-600/80 font-light max-w-2xl mx-auto">
             Waktu tersisa hingga momen yang tak terlupakan
           </p>
 
@@ -84,10 +85,10 @@ const CountdownTimer = () => {
             {timeUnits.map((item, index) => (
               <div 
                 key={item.label}
-                className={`bg-gradient-to-br ${item.color} rounded-2xl  md:p-8 transform transition-all duration-700 hover:shadow-[0_0_30px_rgba(244,114,182,0.3)] relative group`}
+                className={`bg-gradient-to-br ${item.color} rounded-2xl p-6 md:p-8 transform transition-all duration-700 hover:shadow-[0_0_30px_rgba(147,51,234,0.3)] relative group hover:scale-105`}
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
-                <div className="text-4xl md:text-5xl font-bold mb-3 text-white">
+                <div className="text-4xl md:text-6xl font-bold mb-3 text-white">
                   {item.value.toString().padStart(2, '0')}
                 </div>
                 <div className="text-base md:text-lg font-medium text-white/90">
@@ -103,8 +104,13 @@ const CountdownTimer = () => {
             ))}
           </div>
           
-          <div className="text-xl md:text-2xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-500 animate-pulse-slow">
-            13 Juli 2025 • 11:00 WIB
+          <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl p-6 md:p-8">
+            <div className="text-2xl md:text-3xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 animate-pulse-slow">
+              13 Juli 2025 • 11:00 WIB
+            </div>
+            <p className="text-purple-600/70 mt-3 text-sm md:text-base">
+              Masjid Al-Hidayah, Jakarta Selatan
+            </p>
           </div>
         </div>
       </div>

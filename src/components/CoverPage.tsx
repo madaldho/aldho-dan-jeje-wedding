@@ -36,7 +36,7 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
           animationDuration: '20s'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-pink-900/80 via-rose-800/70 to-orange-700/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/80 via-indigo-800/70 to-violet-700/80"></div>
       </div>
 
       {/* Floating Elements */}
@@ -55,47 +55,47 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
             {i % 3 === 0 ? (
               <Flower className="text-white/30 animate-spin" size={16 + (i * 2)} style={{ animationDuration: '8s' }} />
             ) : i % 3 === 1 ? (
-              <Heart className="text-pink-300/40 animate-pulse" size={14 + (i * 2)} />
+              <Heart className="text-purple-300/40 animate-pulse" size={14 + (i * 2)} />
             ) : (
-              <Sparkles className="text-orange-300/40 animate-ping" size={12 + (i * 2)} />
+              <Sparkles className="text-violet-300/40 animate-ping" size={12 + (i * 2)} />
             )}
           </div>
         ))}
       </div>
       
       {/* Content */}
-      <div className="relative z-20 text-center text-white px-4 max-w-sm mx-auto">
+      <div className="relative z-20 text-center text-white px-6 max-w-md mx-auto">
         {/* Islamic Greeting */}
         <div 
-          className="mb-6 animate-slideDown"
+          className="mb-8 animate-slideDown"
           style={{ animationDelay: '0.5s' }}
         >
-          <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
-            <div className="text-xl mb-3 font-arabic text-orange-200">
+          <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-8 border border-white/30 shadow-2xl">
+            <div className="text-xl mb-4 font-arabic text-purple-200">
               السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
             </div>
-            <p className="text-xs opacity-90 tracking-wide">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+            <p className="text-sm opacity-90 tracking-wide">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
           </div>
         </div>
 
         {/* Guest Name */}
         {guestName && (
           <div 
-            className="mb-6 animate-scaleIn"
+            className="mb-8 animate-scaleIn"
             style={{ animationDelay: '0.8s' }}
           >
-            <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
-              <p className="text-xs font-light tracking-[0.3em] mb-2 opacity-90">KEPADA YTH.</p>
-              <h2 className="text-sm font-elegant mb-2 text-pink-200">
+            <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/30 shadow-2xl">
+              <p className="text-xs font-light tracking-[0.3em] mb-3 opacity-90">KEPADA YTH.</p>
+              <h2 className="text-base font-elegant mb-3 text-purple-200">
                 Bapak/Ibu/Saudara/i
               </h2>
               <h1 
-                className="text-lg font-bold text-orange-200 mb-3 break-words animate-pulse"
+                className="text-xl font-bold text-violet-200 mb-4 break-words animate-pulse"
               >
                 {guestName}
               </h1>
               <div 
-                className="w-16 h-0.5 bg-gradient-to-r from-pink-300 to-orange-300 mx-auto animate-expandWidth"
+                className="w-20 h-0.5 bg-gradient-to-r from-purple-300 to-violet-300 mx-auto animate-expandWidth"
                 style={{ animationDelay: '1.2s' }}
               />
             </div>
@@ -104,19 +104,19 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
         
         {/* Wedding Announcement */}
         <div 
-          className="mb-8 animate-slideUp"
+          className="mb-10 animate-slideUp"
           style={{ animationDelay: '1s' }}
         >
-          <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
-            <p className="text-sm font-light tracking-wide mb-4 opacity-90">
+          <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/30 shadow-2xl">
+            <p className="text-sm font-light tracking-wide mb-6 opacity-90">
               Kami mengundang Anda untuk berbagi kebahagiaan dalam
             </p>
             <h2 
-              className="text-2xl font-bold mb-4 bg-gradient-to-r from-pink-300 to-orange-300 bg-clip-text text-transparent font-elegant animate-pulse"
+              className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-violet-300 bg-clip-text text-transparent font-elegant animate-pulse"
             >
               Pernikahan Kami
             </h2>
-            <div className="flex justify-center space-x-2 mb-4">
+            <div className="flex justify-center space-x-3 mb-6">
               {[...Array(3)].map((_, i) => (
                 <div
                   key={i}
@@ -126,7 +126,7 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
                     animationDelay: `${i * 0.7}s`
                   }}
                 >
-                  <Flower className="text-orange-300 animate-pulse" size={18} />
+                  <Flower className="text-violet-300 animate-pulse" size={20} />
                 </div>
               ))}
             </div>
@@ -141,82 +141,84 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
           <div className="hover:scale-105 transition-transform duration-300">
             <Button
               onClick={handleOpenInvitation}
-              className="bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500 hover:from-pink-600 hover:via-rose-600 hover:to-orange-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl transform transition-all duration-300 border-2 border-white/30 backdrop-blur-sm relative overflow-hidden group"
+              className="bg-gradient-to-r from-purple-500 via-indigo-500 to-violet-500 hover:from-purple-600 hover:via-indigo-600 hover:to-violet-600 text-white px-10 py-6 text-lg font-semibold rounded-full shadow-2xl transform transition-all duration-300 border-2 border-white/30 backdrop-blur-sm relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent animate-shimmer" />
-              <Flower className="w-5 h-5 mr-2 animate-spin" style={{ animationDuration: '4s' }} />
+              <Flower className="w-6 h-6 mr-3 animate-spin" style={{ animationDuration: '4s' }} />
               Buka Undangan
             </Button>
           </div>
         </div>
       </div>
       
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          
+          @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+          }
+          
+          @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+          }
+          
+          @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+          }
+          
+          @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 5rem; }
+          }
+          
+          @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+          
+          .animate-fadeIn {
+            animation: fadeIn 1.2s ease-out;
+          }
+          
+          .animate-slideDown {
+            animation: slideDown 0.8s ease-out forwards;
+            opacity: 0;
+          }
+          
+          .animate-slideUp {
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+          }
+          
+          .animate-scaleIn {
+            animation: scaleIn 0.6s ease-out forwards;
+            opacity: 0;
+          }
+          
+          .animate-expandWidth {
+            animation: expandWidth 0.8s ease-out forwards;
+            width: 0;
+          }
+          
+          .animate-shimmer {
+            animation: shimmer 2s infinite ease-in-out;
+          }
+        `
+      }} />
         
-        @keyframes slideDown {
-          from { transform: translateY(-50px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-          from { transform: translateY(50px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes scaleIn {
-          from { transform: scale(0); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-        
-        @keyframes expandWidth {
-          from { width: 0; }
-          to { width: 4rem; }
-        }
-        
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 1.2s ease-out;
-        }
-        
-        .animate-slideDown {
-          animation: slideDown 0.8s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-slideUp {
-          animation: slideUp 0.8s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-scaleIn {
-          animation: scaleIn 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-expandWidth {
-          animation: expandWidth 0.8s ease-out forwards;
-          width: 0;
-        }
-        
-        .animate-shimmer {
-          animation: shimmer 2s infinite ease-in-out;
-        }
-      `}</style>
-        
-        {/* Flower Balloons Animation */}
-        <FlowerBalloons 
-          ref={flowerBalloonsRef}
-          type="mixed"
-          count={25}
-        />
+      {/* Flower Balloons Animation */}
+      <FlowerBalloons 
+        ref={flowerBalloonsRef}
+        type="mixed"
+        count={25}
+      />
     </div>
   );
 };

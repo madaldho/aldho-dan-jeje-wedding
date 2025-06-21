@@ -73,30 +73,32 @@ const TabNavigation = () => {
           defaultActiveIndex={0}
           activeIndex={activeIndex}
           onTabChange={handleTabChange}
-          className="bg-white/95 backdrop-blur-xl border border-rose-200/50 shadow-lg mx-auto"
-          limelightClassName="bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 shadow-[0_50px_15px_rgba(244,63,94,0.3)]"
-          iconContainerClassName="hover:bg-rose-50/50 transition-colors duration-200"
-          iconClassName="text-slate-600 hover:text-rose-500"
+          className="bg-white/95 backdrop-blur-xl border border-purple-200/50 shadow-lg mx-auto"
+          limelightClassName="bg-gradient-to-r from-purple-500 via-indigo-500 to-violet-500 shadow-[0_50px_15px_rgba(147,51,234,0.3)]"
+          iconContainerClassName="hover:bg-purple-50/50 transition-colors duration-200"
+          iconClassName="text-slate-600 hover:text-purple-500"
         />
       </div>
       
-      <style>{`
-        @keyframes slideUpNav {
-          from {
-            transform: translateY(100px);
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes slideUpNav {
+            from {
+              transform: translateY(100px);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+          
+          .animate-slideUpNav {
+            animation: slideUpNav 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             opacity: 0;
           }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-        
-        .animate-slideUpNav {
-          animation: slideUpNav 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-          opacity: 0;
-        }
-      `}</style>
+        `
+      }} />
     </div>
   );
 };
