@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface RSVPProps {
   guestName: string;
@@ -23,17 +24,42 @@ const RSVP = ({ guestName }: RSVPProps) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const { error } = await supabase
+        .from('rsvp_responses')
+        .insert({
+          name: formData.name,
+          attendance: formData.attendance,
+          guest_count: parseInt(formData.guestCount),
+          message: formData.message || null
+        });
+
+      if (error) {
+        throw error;
+      }
+
       toast({
         title: "RSVP Berhasil!",
         description: "Terima kasih telah mengkonfirmasi kehadiran Anda.",
       });
       
-      // Reset form if needed
-      setFormData(prev => ({ ...prev, message: '' }));
-    }, 1000);
+      // Reset form
+      setFormData(prev => ({ 
+        ...prev, 
+        attendance: '',
+        guestCount: '1',
+        message: '' 
+      }));
+    } catch (error) {
+      console.error('Error submitting RSVP:', error);
+      toast({
+        title: "Gagal mengirim RSVP",
+        description: "Terjadi kesalahan, silakan coba lagi.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -145,7 +171,7 @@ const RSVP = ({ guestName }: RSVPProps) => {
                 <Button
                   type="submit"
                   disabled={!formData.name || !formData.attendance || isSubmitting}
-                  className="w-full bg-gradient-to-r from-rose-600 via-pink-600 to-orange-600 hover:from-rose-700 hover:via-pink-700 hover:to-orange-700 text-white py-4 text-xl font-bold rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none animate-shimmer"
+                  className="w-full bg-gradient-to-r from-rose-600 via-pink-600 to-orange-600 hover:from-rose-700 hover:via-pink-700 hover:to-orange-700 text-white py-6 text-xl font-bold rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none border-2 border-rose-500/30 hover:border-rose-400 hover:shadow-2xl hover:shadow-rose-500/25"
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center gap-2">

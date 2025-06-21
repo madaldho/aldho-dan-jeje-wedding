@@ -111,6 +111,33 @@ export type Database = {
         }
         Relationships: []
       }
+      rsvp_responses: {
+        Row: {
+          attendance: string
+          created_at: string
+          guest_count: number | null
+          id: string
+          message: string | null
+          name: string
+        }
+        Insert: {
+          attendance: string
+          created_at?: string
+          guest_count?: number | null
+          id?: string
+          message?: string | null
+          name: string
+        }
+        Update: {
+          attendance?: string
+          created_at?: string
+          guest_count?: number | null
+          id?: string
+          message?: string | null
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

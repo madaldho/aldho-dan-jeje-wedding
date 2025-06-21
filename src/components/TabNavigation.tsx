@@ -80,7 +80,7 @@ const TabNavigation = () => {
         />
       </div>
       
-      <style jsx>{`
+      <style>{`
         @keyframes slideUpNav {
           from {
             transform: translateY(100px);
