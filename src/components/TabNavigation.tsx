@@ -9,14 +9,14 @@ const TabNavigation = () => {
   const [isScrolling, setIsScrolling] = useState(false);
 
   const tabs = [
-    { id: 'hero', icon: Home, label: 'Home' },
-    { id: 'countdown', icon: Calendar, label: 'Countdown' },
-    { id: 'bride-groom', icon: Heart, label: 'Mempelai' },
-    { id: 'event-details', icon: MapPin, label: 'Acara' },
-    { id: 'gallery', icon: Camera, label: 'Galeri' },
-    { id: 'rsvp', icon: Users, label: 'RSVP' },
-    { id: 'wishes', icon: MessageCircle, label: 'Ucapan' },
-    { id: 'digital-gift', icon: Gift, label: 'Kado' }
+    { id: 'hero', icon: Home, label: 'Home', sectionId: 'hero' },
+    { id: 'countdown', icon: Calendar, label: 'Countdown', sectionId: 'countdown' },
+    { id: 'bride-groom', icon: Heart, label: 'Mempelai', sectionId: 'bride-groom' },
+    { id: 'event-details', icon: MapPin, label: 'Acara', sectionId: 'event-details' },
+    { id: 'gallery', icon: Camera, label: 'Galeri', sectionId: 'gallery' },
+    { id: 'rsvp', icon: Users, label: 'RSVP', sectionId: 'rsvp' },
+    { id: 'wishes', icon: MessageCircle, label: 'Ucapan', sectionId: 'wishes' },
+    { id: 'digital-gift', icon: Gift, label: 'Kado', sectionId: 'digital-gift' }
   ];
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const TabNavigation = () => {
       if (isScrolling) return;
       
       // Update active tab based on scroll position
-      const sections = tabs.map(tab => document.getElementById(tab.id));
+      const sections = tabs.map(tab => document.getElementById(tab.sectionId));
       const scrollPos = window.scrollY + 150;
       
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -42,42 +42,24 @@ const TabNavigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isScrolling]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      setIsScrolling(true);
-      const offsetTop = element.offsetTop;
-      const offset = sectionId === 'hero' ? 0 : 100; // No offset for hero, 100px for others to account for fixed nav
-      
-      window.scrollTo({
-        top: offsetTop - offset,
-        behavior: 'smooth'
-      });
-      
-      // Reset scrolling flag after animation completes
-      setTimeout(() => {
-        setIsScrolling(false);
-      }, 1000); // Smooth scroll usually takes ~500-800ms
-    }
-  };
-
   const handleTabChange = (index: number) => {
     setActiveIndex(index);
     setActiveTab(tabs[index].id);
-    // Add small delay to ensure state updates before scrolling
+    
+    // Set scrolling flag to prevent scroll event conflict
+    setIsScrolling(true);
+    
+    // Reset scrolling flag after animation completes
     setTimeout(() => {
-      scrollToSection(tabs[index].id);
-    }, 50);
+      setIsScrolling(false);
+    }, 1000);
   };
 
   const navItems: NavItem[] = tabs.map((tab, index) => ({
     id: tab.id,
     icon: <tab.icon className="w-6 h-6" />,
     label: tab.label,
-    onClick: () => {
-      // This will be handled by onTabChange in LimelightNav
-      // No need to call scrollToSection here to avoid duplication
-    }
+    sectionId: tab.sectionId, // Pass the section ID for scroll functionality
   }));
 
   return (

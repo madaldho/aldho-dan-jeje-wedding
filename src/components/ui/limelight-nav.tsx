@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useLayoutEffect, cloneElement } from 'react';
 
 // --- Internal Types and Defaults ---
@@ -11,6 +12,7 @@ export type NavItem = {
   icon: React.ReactElement;
   label?: string;
   onClick?: () => void;
+  sectionId?: string; // Add this for scroll functionality
 };
 
 const defaultNavItems: NavItem[] = [
@@ -69,29 +71,48 @@ export const LimelightNav = ({
     return null; 
   }
 
-  const handleItemClick = (index: number, itemOnClick?: () => void) => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offsetTop = element.offsetTop;
+      const offset = sectionId === 'hero' ? 0 : 100; // No offset for hero, 100px for others to account for fixed nav
+      
+      window.scrollTo({
+        top: offsetTop - offset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleItemClick = (index: number, item: NavItem) => {
     if (controlledActiveIndex === undefined) {
       setInternalActiveIndex(index);
     }
-    // Update state first, then trigger scroll
+    
+    // Handle scroll to section if sectionId is provided
+    if (item.sectionId) {
+      scrollToSection(item.sectionId);
+    }
+    
+    // Update state and trigger callbacks
     onTabChange?.(index);
-    itemOnClick?.();
+    item.onClick?.();
   };
 
   return (
     <nav className={`relative inline-flex items-center h-16 rounded-lg bg-card text-foreground border px-2 ${className}`}>
-      {items.map(({ id, icon, label, onClick }, index) => (
+      {items.map((item, index) => (
           <a
-            key={id}
+            key={item.id}
             ref={el => (navItemRefs.current[index] = el)}
             className={`relative z-20 flex h-full cursor-pointer items-center justify-center p-5 ${iconContainerClassName}`}
-            onClick={() => handleItemClick(index, onClick)}
-            aria-label={label}
+            onClick={() => handleItemClick(index, item)}
+            aria-label={item.label}
           >
-            {cloneElement(icon, {
+            {cloneElement(item.icon, {
               className: `w-6 h-6 transition-opacity duration-100 ease-in-out ${
                 activeIndex === index ? 'opacity-100' : 'opacity-40'
-              } ${icon.props.className || ''} ${iconClassName || ''}`,
+              } ${item.icon.props.className || ''} ${iconClassName || ''}`,
             })}
           </a>
       ))}
