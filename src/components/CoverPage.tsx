@@ -1,7 +1,8 @@
 
-import { useState, useEffect } from 'react';
-import { Heart, Calendar, MapPin, Music, Gift } from 'lucide-react';
-import { FlowerBalloons } from './ui/flower-balloons';
+import { Button } from '@/components/ui/button';
+import { Flower, Heart, Sparkles } from 'lucide-react';
+import { FlowerBalloons } from '@/components/ui/flower-balloons';
+import { useRef } from 'react';
 
 interface CoverPageProps {
   guestName: string;
@@ -9,135 +10,213 @@ interface CoverPageProps {
 }
 
 const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-      setTimeout(() => setShowContent(true), 800);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const flowerBalloonsRef = useRef<{ launchAnimation: () => void } | null>(null);
 
   const handleOpenInvitation = () => {
-    onOpenInvitation();
+    // Launch flower balloons animation
+    if (flowerBalloonsRef.current) {
+      flowerBalloonsRef.current.launchAnimation();
+    }
+    
+    // Delay the actual invitation opening to let animation play
+    setTimeout(() => {
+      onOpenInvitation();
+    }, 500);
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-violet-900 via-purple-900 to-indigo-900">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        {/* Floating particles */}
-        <div className="absolute inset-0">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white/30 rounded-full animate-float"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 4}s`
-              }}
-            />
-          ))}
-        </div>
-        
-        {/* Gradient overlays */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-violet-600/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
+    <div 
+      className="min-h-screen relative overflow-hidden flex items-center justify-center animate-fadeIn"
+    >
+      {/* Animated Background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center animate-pulse"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")',
+          animationDuration: '20s'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-pink-900/80 via-rose-800/70 to-orange-700/80"></div>
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-6 text-center">
-        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          {/* Decorative Elements */}
-          <div className="mb-8 flex justify-center items-center gap-4">
-            <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-purple-300 to-transparent animate-pulse" />
-            <Heart className="text-purple-300 animate-pulse" size={24} />
-            <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-purple-300 to-transparent animate-pulse" />
+      {/* Floating Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-bounce"
+            style={{
+              top: `${5 + (i * 6)}%`,
+              left: `${2 + (i * 6)}%`,
+              animationDelay: `${i * 0.3}s`,
+              animationDuration: `${10 + i}s`
+            }}
+          >
+            {i % 3 === 0 ? (
+              <Flower className="text-white/30 animate-spin" size={16 + (i * 2)} style={{ animationDuration: '8s' }} />
+            ) : i % 3 === 1 ? (
+              <Heart className="text-pink-300/40 animate-pulse" size={14 + (i * 2)} />
+            ) : (
+              <Sparkles className="text-orange-300/40 animate-ping" size={12 + (i * 2)} />
+            )}
           </div>
-
-          {/* Wedding Invitation Text */}
-          <div className="space-y-4 mb-12">
-            <p className="text-purple-200 text-lg font-light tracking-wider">
-              The Wedding of
-            </p>
-            <h1 className="text-6xl md:text-8xl font-bold font-elegant text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-indigo-200 to-violet-300 animate-shimmer">
-              Aldho & Jeje
-            </h1>
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <Calendar className="text-purple-300" size={20} />
-              <p className="text-purple-200 text-xl font-light">
-                13 Juli 2025
-              </p>
+        ))}
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-20 text-center text-white px-4 max-w-sm mx-auto">
+        {/* Islamic Greeting */}
+        <div 
+          className="mb-6 animate-slideDown"
+          style={{ animationDelay: '0.5s' }}
+        >
+          <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
+            <div className="text-xl mb-3 font-arabic text-orange-200">
+              السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
             </div>
+            <p className="text-xs opacity-90 tracking-wide">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
           </div>
+        </div>
 
-          {/* Guest Name */}
-          {guestName && showContent && (
-            <div className={`mb-12 transition-all duration-800 delay-500 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-              <div className="glass-card bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 max-w-md mx-auto">
-                <p className="text-purple-200 text-sm font-light mb-2 uppercase tracking-wider">
-                  Kepada Yth.
-                </p>
-                <p className="text-purple-100 text-2xl font-semibold">
-                  {guestName}
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Invitation Message */}
-          {showContent && (
-            <div className={`mb-12 transition-all duration-800 delay-700 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-              <div className="max-w-2xl mx-auto space-y-4">
-                <p className="text-purple-200 text-lg font-light leading-relaxed">
-                  Dengan penuh sukacita, kami mengundang Anda untuk hadir dalam momen bahagia kami
-                </p>
-                <div className="flex items-center justify-center gap-4">
-                  <MapPin className="text-purple-300" size={16} />
-                  <p className="text-purple-300 text-sm">
-                    Desa Dukuh, Kapetakan, Cirebon
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Open Invitation Button */}
-          {showContent && (
-            <div className={`transition-all duration-800 delay-1000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-              <button
-                onClick={handleOpenInvitation}
-                className="group relative bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-600 text-white px-12 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95"
+        {/* Guest Name */}
+        {guestName && (
+          <div 
+            className="mb-6 animate-scaleIn"
+            style={{ animationDelay: '0.8s' }}
+          >
+            <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
+              <p className="text-xs font-light tracking-[0.3em] mb-2 opacity-90">KEPADA YTH.</p>
+              <h2 className="text-sm font-elegant mb-2 text-pink-200">
+                Bapak/Ibu/Saudara/i
+              </h2>
+              <h1 
+                className="text-lg font-bold text-orange-200 mb-3 break-words animate-pulse"
               >
-                <span className="relative z-10 flex items-center gap-3">
-                  <Gift className="w-5 h-5" />
-                  Buka Undangan
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-indigo-500 to-violet-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </button>
+                {guestName}
+              </h1>
+              <div 
+                className="w-16 h-0.5 bg-gradient-to-r from-pink-300 to-orange-300 mx-auto animate-expandWidth"
+                style={{ animationDelay: '1.2s' }}
+              />
             </div>
-          )}
-
-          {/* Background Music Note */}
-          <div className={`mt-12 transition-all duration-800 delay-1200 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-            <div className="flex items-center justify-center gap-2 text-purple-300/70">
-              <Music className="w-4 h-4 animate-pulse" />
-              <p className="text-sm font-light">
-                Background music will play when opened
-              </p>
+          </div>
+        )}
+        
+        {/* Wedding Announcement */}
+        <div 
+          className="mb-8 animate-slideUp"
+          style={{ animationDelay: '1s' }}
+        >
+          <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
+            <p className="text-sm font-light tracking-wide mb-4 opacity-90">
+              Kami mengundang Anda untuk berbagi kebahagiaan dalam
+            </p>
+            <h2 
+              className="text-2xl font-bold mb-4 bg-gradient-to-r from-pink-300 to-orange-300 bg-clip-text text-transparent font-elegant animate-pulse"
+            >
+              Pernikahan Kami
+            </h2>
+            <div className="flex justify-center space-x-2 mb-4">
+              {[...Array(3)].map((_, i) => (
+                <div
+                  key={i}
+                  className="animate-spin"
+                  style={{ 
+                    animationDuration: `${4 + i}s`,
+                    animationDelay: `${i * 0.7}s`
+                  }}
+                >
+                  <Flower className="text-orange-300 animate-pulse" size={18} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Flower Balloons Animation */}
-      <FlowerBalloons />
+        {/* Open Invitation Button */}
+        <div 
+          className="animate-scaleIn"
+          style={{ animationDelay: '1.3s' }}
+        >
+          <div className="hover:scale-105 transition-transform duration-300">
+            <Button
+              onClick={handleOpenInvitation}
+              className="bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500 hover:from-pink-600 hover:via-rose-600 hover:to-orange-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl transform transition-all duration-300 border-2 border-white/30 backdrop-blur-sm relative overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent animate-shimmer" />
+              <Flower className="w-5 h-5 mr-2 animate-spin" style={{ animationDuration: '4s' }} />
+              Buka Undangan
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+          from { transform: translateY(-50px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+          from { transform: translateY(50px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+          from { transform: scale(0); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes expandWidth {
+          from { width: 0; }
+          to { width: 4rem; }
+        }
+        
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 1.2s ease-out;
+        }
+        
+        .animate-slideDown {
+          animation: slideDown 0.8s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-scaleIn {
+          animation: scaleIn 0.6s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-expandWidth {
+          animation: expandWidth 0.8s ease-out forwards;
+          width: 0;
+        }
+        
+        .animate-shimmer {
+          animation: shimmer 2s infinite ease-in-out;
+        }
+      `}</style>
+        
+        {/* Flower Balloons Animation */}
+        <FlowerBalloons 
+          ref={flowerBalloonsRef}
+          type="mixed"
+          count={25}
+        />
     </div>
   );
 };

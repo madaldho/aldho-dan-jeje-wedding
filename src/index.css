@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -179,6 +180,9 @@
   50% {
     transform: translateY(-10px) rotate(-5deg);
   }
+  75% {
+    transform: translateY(-15px) rotate(3deg);
+  }
 }
 
 @keyframes shimmer {
@@ -270,9 +274,9 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Gradient Text Effects - Updated to Purple Theme */
+/* Gradient Text Effects */
 .gradient-text {
-  background: linear-gradient(135deg, #8b5cf6, #6366f1, #7c3aed);
+  background: linear-gradient(135deg, #ec4899, #f97316, #eab308);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -447,6 +451,9 @@ html {
   50% {
     transform: translateY(-15px) rotate(0deg);
   }
+  75% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
 }
 
 @keyframes sparkle-dance {
@@ -558,7 +565,7 @@ html {
 }
 
 .bg-wedding-gradient {
-  @apply bg-gradient-to-r from-pink-500 via-rose-500 to-orange-50;
+  @apply bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500;
 }
 
 .bg-wedding-light {

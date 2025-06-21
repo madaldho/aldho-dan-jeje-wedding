@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import CoverPage from '../components/CoverPage';
@@ -55,7 +56,7 @@ const Index = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Fixed Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50 z-0"></div>
+      <div className="fixed inset-0 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 z-0"></div>
       
       <FloatingParticles />
       <FloralElements />
@@ -65,7 +66,7 @@ const Index = () => {
       {/* Gradient Blur Overlay */}
       <div className={`scroll-gradient-overlay ${showScrollOverlay ? 'active' : ''}`}></div>
       
-      <div className="pb-24 relative z-10 space-y-8">
+      <div className="pb-20 relative z-10">
         <ScrollAnimation animation="fadeInUp" delay={0.5} duration={1.2}>
           <div id="hero" className="section-container hero-section">
             <HeroSection />
@@ -73,8 +74,8 @@ const Index = () => {
         </ScrollAnimation>
         
         <ScrollAnimation animation="scaleIn" delay={0.2} duration={0.8}>
-          <div className="section-container px-4 md:px-8">
-            <InteractiveCard className="max-w-6xl mx-auto">
+          <div className="section-container">
+            <InteractiveCard className="mx-4 md:mx-8">
               <div id="countdown">
                 <CountdownTimer />
               </div>
@@ -83,8 +84,8 @@ const Index = () => {
         </ScrollAnimation>
 
         <ScrollAnimation animation="fadeInLeft" delay={0.1} duration={0.9}>
-          <div className="section-container px-4 md:px-8">
-            <InteractiveCard className="max-w-6xl mx-auto">
+          <div className="section-container">
+            <InteractiveCard className="mx-4 md:mx-8">
               <div id="bride-groom">
                 <BrideGroom />
               </div>
@@ -93,8 +94,8 @@ const Index = () => {
         </ScrollAnimation>
         
         <ScrollAnimation animation="fadeInRight" delay={0.2} duration={0.8}>
-          <div className="section-container px-4 md:px-8">
-            <InteractiveCard className="max-w-6xl mx-auto">
+          <div className="section-container">
+            <InteractiveCard className="mx-4 md:mx-8">
               <div id="event-details">
                 <EventDetails />
               </div>
@@ -103,8 +104,8 @@ const Index = () => {
         </ScrollAnimation>
         
         <ScrollAnimation animation="slideInBounce" delay={0.3} duration={1.0}>
-          <div className="section-container px-4 md:px-8">
-            <InteractiveCard className="max-w-6xl mx-auto">
+          <div className="section-container">
+            <InteractiveCard className="mx-4 md:mx-8">
               <div id="gallery">
                 <Gallery />
               </div>
@@ -113,8 +114,8 @@ const Index = () => {
         </ScrollAnimation>
         
         <ScrollAnimation animation="rotateIn" delay={0.2} duration={0.9}>
-          <div className="section-container px-4 md:px-8">
-            <InteractiveCard className="max-w-6xl mx-auto">
+          <div className="section-container">
+            <InteractiveCard className="mx-4 md:mx-8">
               <div id="rsvp">
                 <RSVP guestName={guestName} />
               </div>
@@ -123,8 +124,8 @@ const Index = () => {
         </ScrollAnimation>
         
         <ScrollAnimation animation="fadeInUp" delay={0.1} duration={0.8}>
-          <div className="section-container px-4 md:px-8">
-            <InteractiveCard className="max-w-6xl mx-auto">
+          <div className="section-container">
+            <InteractiveCard className="mx-4 md:mx-8">
               <div id="wishes">
                 <Wishes />
               </div>
@@ -133,8 +134,8 @@ const Index = () => {
         </ScrollAnimation>
         
         <ScrollAnimation animation="scaleIn" delay={0.3} duration={1.0}>
-          <div className="section-container px-4 md:px-8">
-            <InteractiveCard className="max-w-6xl mx-auto">
+          <div className="section-container">
+            <InteractiveCard className="mx-4 md:mx-8">
               <div id="digital-gift">
                 <DigitalGift />
               </div>
@@ -144,7 +145,7 @@ const Index = () => {
       </div>
       
       <ScrollAnimation animation="fadeInUp" delay={0.4} duration={1.0}>
-        <footer className="bg-gradient-to-br from-violet-950 via-indigo-950 to-slate-950 text-white py-24 md:py-32 px-6 md:px-8 text-center relative overflow-hidden backdrop-blur-xl">
+        <footer className="bg-gradient-to-br from-violet-950 via-indigo-950 to-slate-950 text-white py-20 md:py-32 px-4 md:px-8 text-center relative overflow-hidden backdrop-blur-xl">
           {/* Luxurious Background Effects */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.1),rgba(79,70,229,0.05))] animate-gradient-shift"></div>
           <div className="absolute inset-0 bg-[url('/patterns/elegant-dots.svg')] opacity-20 animate-float-slow"></div>
@@ -173,7 +174,7 @@ const Index = () => {
                 </p>
               </div>
               
-              <div className="glass-card backdrop-blur-lg bg-white/5 p-12 rounded-3xl mb-16 transform hover:scale-102 transition-all duration-300 border border-white/10">
+              <div className="glass-card backdrop-blur-lg bg-white/5 p-10 rounded-3xl mb-16 transform hover:scale-102 transition-all duration-300 border border-white/10">
                 <p className="text-lg md:text-xl text-indigo-100 font-light leading-relaxed mb-6 italic">
                   "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri"
                 </p>

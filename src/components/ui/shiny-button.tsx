@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import { cn } from "@/lib/utils";
@@ -43,18 +42,16 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
         className="absolute inset-0 z-10 block rounded-[inherit] bg-[linear-gradient(-75deg,hsl(var(--primary)/10%)_calc(var(--x)+20%),hsl(var(--primary)/50%)_calc(var(--x)+25%),hsl(var(--primary)/10%)_calc(var(--x)+100%))] p-px"
       ></span>
       
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          @keyframes shimmer {
-            0% {
-              --x: 100%;
-            }
-            100% {
-              --x: -100%;
-            }
+      <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            --x: 100%;
           }
-        `
-      }} />
+          100% {
+            --x: -100%;
+          }
+        }
+      `}</style>
     </button>
   );
 };
