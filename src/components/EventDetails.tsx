@@ -1,5 +1,4 @@
 
-import { Button } from '@/components/ui/button';
 import { Calendar, MapPin, Flower, Navigation } from 'lucide-react';
 import { ShinyButton } from '@/components/ui/shiny-button';
 
@@ -21,23 +20,23 @@ const EventDetails = () => {
   };
 
   return (
-    <section id="event-details" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50 relative overflow-hidden">
+    <section id="event-details" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 relative overflow-hidden">
       {/* Enhanced Floating floral elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-rose-500/8 via-pink-500/6 to-orange-500/8 animate-gradient-shift"></div>
-        <Flower className="absolute top-10 left-10 text-rose-300/50 animate-float" size={28} />
-        <Flower className="absolute top-32 right-16 text-pink-300/50 animate-pulse" size={24} />
-        <Flower className="absolute bottom-20 left-20 text-orange-300/50 animate-bounce" size={32} />
-        <Flower className="absolute bottom-40 right-10 text-rose-300/50 animate-float" size={26} />
-        <Flower className="absolute top-1/2 left-1/4 text-pink-300/30 animate-pulse" size={20} />
-        <Flower className="absolute top-1/3 right-1/3 text-orange-300/30 animate-float" size={18} />
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/8 via-purple-500/6 to-indigo-500/8 animate-gradient-shift"></div>
+        <Flower className="absolute top-10 left-10 text-violet-300/50 animate-float" size={28} />
+        <Flower className="absolute top-32 right-16 text-purple-300/50 animate-pulse" size={24} />
+        <Flower className="absolute bottom-20 left-20 text-indigo-300/50 animate-bounce" size={32} />
+        <Flower className="absolute bottom-40 right-10 text-violet-300/50 animate-float" size={26} />
+        <Flower className="absolute top-1/2 left-1/4 text-purple-300/30 animate-pulse" size={20} />
+        <Flower className="absolute top-1/3 right-1/3 text-indigo-300/30 animate-float" size={18} />
       </div>
       
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-20">
           <div className="flex justify-center mb-8">
             <div className="glass-card rounded-full p-6 shadow-2xl animate-pulse">
-              <Flower className="text-rose-500 animate-bounce" size={48} />
+              <Flower className="text-violet-500 animate-bounce" size={48} />
             </div>
           </div>
           <h2 className="text-5xl md:text-6xl font-bold mb-8 text-slate-800 font-elegant gradient-text animate-shimmer">
@@ -53,20 +52,20 @@ const EventDetails = () => {
           <div className="backdrop-blur-md bg-white/30 rounded-3xl p-8 md:p-12 transform transition-all duration-500 hover:scale-[1.02] animate-fadeInUp border border-white/40 shadow-lg">
             <div className="text-center mb-12">
               <h3 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 font-elegant gradient-text animate-shimmer">Akad Nikah & Resepsi</h3>
-              <div className="w-32 h-2 bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 mx-auto rounded-full animate-shimmer"></div>
+              <div className="w-32 h-2 bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 mx-auto rounded-full animate-shimmer"></div>
             </div>
             
             <div className="flex flex-col md:flex-row gap-8 items-stretch">
               <div className="flex-1 backdrop-blur-xl bg-white/30 rounded-3xl p-8 hover:scale-102 transition-all duration-500 border border-white/50 shadow-xl group">
                 <div className="flex flex-col items-center text-center space-y-6">
-                  <div className="bg-gradient-to-br from-rose-400 to-rose-600 rounded-full p-4 transform group-hover:rotate-12 transition-transform duration-300 shadow-lg">
+                  <div className="bg-gradient-to-br from-violet-400 to-violet-600 rounded-full p-4 transform group-hover:rotate-12 transition-transform duration-300 shadow-lg">
                     <Calendar className="w-10 h-10 text-white" />
                   </div>
                   <div className="space-y-2">
                     <h4 className="font-bold text-2xl md:text-3xl bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
                       Minggu, 13 Juli 2025
                     </h4>
-                    <div className="h-1 w-20 mx-auto bg-gradient-to-r from-rose-400 to-orange-400 rounded-full"></div>
+                    <div className="h-1 w-20 mx-auto bg-gradient-to-r from-violet-400 to-indigo-400 rounded-full"></div>
                     <p className="text-slate-600 text-xl font-medium tracking-wide">
                       11:00 WIB - Selesai
                     </p>
@@ -76,14 +75,14 @@ const EventDetails = () => {
               
               <div className="flex-1 backdrop-blur-xl bg-white/30 rounded-3xl p-8 hover:scale-102 transition-all duration-500 border border-white/50 shadow-xl group">
                 <div className="flex flex-col items-center text-center space-y-6">
-                  <div className="bg-gradient-to-br from-orange-400 to-orange-600 rounded-full p-4 transform group-hover:rotate-12 transition-transform duration-300 shadow-lg">
+                  <div className="bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full p-4 transform group-hover:rotate-12 transition-transform duration-300 shadow-lg">
                     <MapPin className="w-10 h-10 text-white" />
                   </div>
                   <div className="space-y-4">
                     <h4 className="font-bold text-2xl md:text-3xl bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
                       Rumah Mempelai Wanita
                     </h4>
-                    <div className="h-1 w-20 mx-auto bg-gradient-to-r from-rose-400 to-orange-400 rounded-full"></div>
+                    <div className="h-1 w-20 mx-auto bg-gradient-to-r from-violet-400 to-indigo-400 rounded-full"></div>
                     <div className="space-y-2">
                       <p className="text-slate-600 text-lg leading-relaxed">
                         Dusun IV RT 03/07 Desa Dukuh
@@ -105,7 +104,7 @@ const EventDetails = () => {
           <div className="backdrop-blur-md bg-white/30 rounded-3xl p-8 md:p-12 animate-fadeInUp border border-white/40 shadow-lg" style={{ animationDelay: '0.2s' }}>
             <div className="text-center mb-12">
               <h3 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 font-elegant gradient-text animate-shimmer">Lokasi Acara</h3>
-              <div className="w-32 h-2 bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 mx-auto rounded-full animate-shimmer"></div>
+              <div className="w-32 h-2 bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 mx-auto rounded-full animate-shimmer"></div>
             </div>
             
             {/* Google Maps Embed */}
@@ -122,40 +121,45 @@ const EventDetails = () => {
               ></iframe>
             </div>
             
-            {/* Navigation Button */}
-            <ShinyButton
-              onClick={handleOpenMaps}
-              className="w-full bg-white/90 hover:bg-white text-rose-600 border border-rose-200 shadow-sm 
-              py-4 px-6 text-lg font-medium rounded-2xl hover:shadow-md
-              transition-all duration-300 ease-in-out
-              flex items-center justify-center gap-3"
-            >
-              <Navigation className="w-5 h-5 text-rose-500" strokeWidth={2} />
-              <span className="bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent">
-                Buka di Google Maps
-              </span>
-            </ShinyButton>
+            {/* Navigation Button with Proper Alignment */}
+            <div className="flex justify-center">
+              <ShinyButton
+                onClick={handleOpenMaps}
+                className="bg-white/90 hover:bg-white text-violet-600 border border-violet-200 shadow-sm 
+                py-4 px-8 text-lg font-medium rounded-2xl hover:shadow-md
+                transition-all duration-300 ease-in-out
+                flex items-center justify-center gap-3 min-w-[200px]"
+              >
+                <Navigation className="w-5 h-5 text-violet-500" strokeWidth={2} />
+                <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                  Buka di Google Maps
+                </span>
+              </ShinyButton>
+            </div>
           </div>
 
           {/* Additional Info */}
           <div className="backdrop-blur-md bg-white/30 rounded-3xl p-8 md:p-12 animate-fadeInUp border border-white/40 shadow-lg" style={{ animationDelay: '0.4s' }}>
             <div className="text-center mb-12">
               <h3 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 font-elegant gradient-text animate-shimmer">Informasi Tambahan</h3>
-              <div className="w-32 h-2 bg-gradient-to-r from-rose-500 via-pink-500 to-orange-500 mx-auto rounded-full animate-shimmer"></div>
+              <div className="w-32 h-2 bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 mx-auto rounded-full animate-shimmer"></div>
             </div>
             
-            <ShinyButton
-              onClick={handleSaveToCalendar}
-              className="w-full bg-white/90 hover:bg-white text-rose-600 border border-rose-200 shadow-sm 
-              py-4 px-6 text-lg font-medium rounded-2xl hover:shadow-md
-              transition-all duration-300 ease-in-out
-              flex items-center justify-center gap-3"
-            >
-              <Calendar className="w-5 h-5 text-rose-500" strokeWidth={2} />
-              <span className="bg-gradient-to-r from-rose-600 to-orange-600 bg-clip-text text-transparent">
-                Simpan ke Kalender
-              </span>
-            </ShinyButton>
+            {/* Calendar Button with Proper Alignment */}
+            <div className="flex justify-center">
+              <ShinyButton
+                onClick={handleSaveToCalendar}
+                className="bg-white/90 hover:bg-white text-violet-600 border border-violet-200 shadow-sm 
+                py-4 px-8 text-lg font-medium rounded-2xl hover:shadow-md
+                transition-all duration-300 ease-in-out
+                flex items-center justify-center gap-3 min-w-[200px]"
+              >
+                <Calendar className="w-5 h-5 text-violet-500" strokeWidth={2} />
+                <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                  Simpan ke Kalender
+                </span>
+              </ShinyButton>
+            </div>
           </div>
         </div>
       </div>
