@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { LimelightNav, NavItem } from '@/components/ui/limelight-nav';
 import { Home, Heart, Calendar, Camera, Mail } from 'lucide-react';
@@ -29,19 +30,25 @@ const StickyNav = () => {
 		if (isScrollingRef.current) return;
 
 		const sections = navItems.map(item => document.getElementById(item.sectionId));
-		const scrollPosition = window.scrollY + window.innerHeight / 2;
+		const scrollPosition = window.scrollY + 200; // Adjusted offset for better detection
 
+		// Find the current section
+		let currentSection = 0;
 		for (let i = sections.length - 1; i >= 0; i--) {
 			const section = sections[i];
 			if (section && section.offsetTop <= scrollPosition) {
-				setActiveLink(i);
+				currentSection = i;
 				break;
 			}
 		}
+
+		setActiveLink(currentSection);
 	}, []);
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll);
+		// Initial call to set the correct active section
+		handleScroll();
 
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
@@ -52,23 +59,28 @@ const StickyNav = () => {
 	}, [handleScroll]);
 
 	const handleTabChange = useCallback((index: number) => {
-		isScrollingRef.current = true;
+		// Immediately update the active link for instant visual feedback
 		setActiveLink(index);
+		
+		// Set scrolling flag to prevent scroll handler from interfering
+		isScrollingRef.current = true;
 
 		if (scrollTimeoutRef.current) {
 			clearTimeout(scrollTimeoutRef.current);
 		}
 
+		// Scroll to the section
 		scroller.scrollTo(navItems[index].sectionId, {
 			duration: 800,
 			delay: 0,
 			smooth: 'easeInOutQuart',
-			offset: -50,
+			offset: -100, // Adjusted offset for better positioning
 		});
 
+		// Reset scrolling flag after animation completes
 		scrollTimeoutRef.current = window.setTimeout(() => {
 			isScrollingRef.current = false;
-		}, 800);
+		}, 1000); // Increased timeout to ensure scroll completes
 	}, []);
 
 	return (

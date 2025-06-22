@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, cloneElement } from 'react';
+import React, { useState, useRef, useLayoutEffect, cloneElement, useEffect } from 'react';
 
 // --- Internal Types and Defaults ---
 
@@ -46,6 +46,7 @@ export const LimelightNav = ({
   const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const limelightRef = useRef<HTMLDivElement | null>(null);
 
+  // Update limelight position whenever activeLink changes
   useLayoutEffect(() => {
     if (items.length === 0) return;
 
@@ -61,6 +62,13 @@ export const LimelightNav = ({
       }
     }
   }, [activeLink, isReady, items]);
+
+  // Ensure limelight updates when component mounts or items change
+  useEffect(() => {
+    if (items.length > 0 && !isReady) {
+      setTimeout(() => setIsReady(true), 100);
+    }
+  }, [items, isReady]);
 
   if (items.length === 0) {
     return null; 
