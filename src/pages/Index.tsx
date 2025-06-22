@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import CoverPage from '../components/CoverPage';
@@ -109,7 +108,7 @@ const Index = () => {
           </div>
         </ScrollAnimation>
         
-        <ScrollAnimation animation="fadeInUp" delay={0.4} duration={1.2}>
+        <ScrollAnimation animation="fadeIn" delay={0.4} duration={1.2}>
           <div className="section-container">
             <div id="digital-gift">
               <DigitalGift />
