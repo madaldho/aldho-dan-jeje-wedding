@@ -242,7 +242,7 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
           font-size: 0.95rem;
           font-weight: 600;
           box-shadow: 
-            0 15px 30px rgba(244, 63, 94, 0.35),
+            0 8px 16px rgba(244, 63, 94, 0.1),
             0 0 0 1px rgba(255,255,255,0.2) inset;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
@@ -252,7 +252,7 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
         .luxury-button-mobile:hover {
           transform: translateY(-1px) scale(1.02);
           box-shadow: 
-            0 20px 40px rgba(244, 63, 94, 0.5),
+            0 12px 24px rgba(244, 63, 94, 0.1),
             0 0 0 1px rgba(255,255,255,0.3) inset;
         }
         

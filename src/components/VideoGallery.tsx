@@ -39,23 +39,23 @@ const VideoGallery = () => {
   ];
 
   return (
-    <section id="video-gallery" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 overflow-hidden relative">
+    <section id="video-gallery" className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50 overflow-hidden relative">
       {/* Enhanced Background Pattern */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/8 via-indigo-500/6 to-blue-500/8 animate-gradient-shift"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-rose-500/8 via-pink-500/6 to-orange-500/8 animate-gradient-shift"></div>
         
         {/* Enhanced Decorative elements */}
-        <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-purple-300/30 to-indigo-300/30 rounded-full blur-2xl animate-float"></div>
-        <div className="absolute bottom-20 left-20 w-40 h-40 bg-gradient-to-br from-blue-300/30 to-purple-300/30 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-br from-indigo-300/20 to-blue-300/20 rounded-full blur-xl animate-bounce"></div>
+        <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-rose-300/30 to-pink-300/30 rounded-full blur-2xl animate-float"></div>
+        <div className="absolute bottom-20 left-20 w-40 h-40 bg-gradient-to-br from-orange-300/30 to-rose-300/30 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-br from-pink-300/20 to-orange-300/20 rounded-full blur-xl animate-bounce"></div>
       </div>
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold mb-8 text-slate-800 font-elegant gradient-text animate-shimmer">
+          <h2 className="text-5xl md:text-6xl font-bold mb-8 text-rose-700 font-elegant gradient-text animate-shimmer">
             Video
           </h2>
-          <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-medium">
+          <p className="text-xl md:text-2xl text-rose-600 max-w-4xl mx-auto leading-relaxed font-medium">
             Koleksi video ucapan
           </p>
         </div>

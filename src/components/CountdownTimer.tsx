@@ -33,9 +33,9 @@ const CountdownTimer = () => {
   const getTimeUnitStyle = (index: number) => {
     const gradients = [
       'bg-gradient-to-br from-pink-500 to-rose-500',
-      'bg-gradient-to-br from-pink-400 to-rose-400', 
-      'bg-gradient-to-br from-rose-400 to-pink-400',
-      'bg-gradient-to-br from-rose-300 to-pink-300'
+      'bg-gradient-to-br from-pink-400 to-rose-500', 
+      'bg-gradient-to-br from-rose-500 to-pink-500',
+      'bg-gradient-to-br from-rose-400 to-pink-500'
     ];
     return gradients[index] || gradients[0];
   };
@@ -51,12 +51,7 @@ const CountdownTimer = () => {
     <section id="countdown" className="relative overflow-hidden w-full min-h-[60vh] bg-gradient-to-b from-rose-50 via-pink-50 to-rose-100">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-10"
-          style={{
-            backgroundImage: 'url("/luxury-pattern.png")'
-          }}
-        />
+        
         <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(244,114,182,0.08)_1px,transparent_1px)] bg-[length:20px_20px]"></div>
         {/* Animated Pink Particles */}
         <div className="absolute inset-0 animate-twinkle">
@@ -107,7 +102,7 @@ const CountdownTimer = () => {
               </div>
             ))}
           </div>
-          <div className="text-xl md:text-2xl font-serif text-rose-600 font-bold animate-pulse-slow">
+          <div className="text-xl md:text-2xl font-serif text-orange-600 font-bold animate-pulse-slow">
             13 Juli 2025 • 11:00 WIB
           </div>
         </div>
