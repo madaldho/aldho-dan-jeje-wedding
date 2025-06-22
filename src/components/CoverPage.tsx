@@ -10,12 +10,12 @@ interface CoverPageProps {
 }
 
 const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
-  const flowerBalloonsRef = useRef<{ launchAnimation: () => void } | null>(null);
+  const flowerBalloonsRef = useRef<HTMLDivElement>(null);
 
   const handleOpenInvitation = () => {
     // Launch flower balloons animation
-    if (flowerBalloonsRef.current) {
-      flowerBalloonsRef.current.launchAnimation();
+    if (flowerBalloonsRef.current && 'launchAnimation' in flowerBalloonsRef.current) {
+      (flowerBalloonsRef.current as any).launchAnimation();
     }
     
     // Delay the actual invitation opening to let animation play
@@ -23,6 +23,7 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
       onOpenInvitation();
     }, 500);
   };
+
   return (
     <div 
       className="min-h-screen relative overflow-hidden flex items-center justify-center animate-fadeIn wedding-content"
@@ -109,7 +110,8 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
           <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
             <p className="text-sm font-light tracking-wide mb-4 opacity-90">
               Kami mengundang Anda untuk berbagi kebahagiaan dalam
-            </p>            <h2 
+            </p>
+            <h2 
               className="text-2xl font-bold mb-4 text-pink-300 bg-gradient-to-r from-pink-300 to-orange-300 bg-clip-text gradient-text font-elegant animate-pulse"
             >
               Pernikahan Kami
@@ -149,7 +151,7 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
         </div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }

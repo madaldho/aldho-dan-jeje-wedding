@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Flower, Heart, Sparkles } from "lucide-react"
@@ -96,10 +97,13 @@ const FlowerBalloons = React.forwardRef<HTMLDivElement, FlowerBalloonsProps>(
       }, 1000)
     }, [type, count, onLaunch, isAnimating])
 
-    React.useImperativeHandle(ref, () => ({
-      launchAnimation,
-      ...(containerRef.current || {})
-    }), [launchAnimation])
+    React.useImperativeHandle(ref, () => {
+      const element = containerRef.current;
+      if (element) {
+        return Object.assign(element, { launchAnimation });
+      }
+      return null;
+    }, [launchAnimation])
 
     return (
       <div 

@@ -97,7 +97,6 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
       toast({
         title: "Konfirmasi Terkirim!",
         description: "Terima kasih atas partisipasi Anda.",
-        icon: <CheckCircle className="h-5 w-5 text-green-500" />,
       });
       
       setFormData(prev => ({ ...prev, message: '', attendance: '', guestCount: '1' }));
@@ -108,7 +107,6 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
         title: "Gagal Mengirim",
         description: "Terjadi kesalahan. Silakan coba lagi.",
         variant: "destructive",
-        icon: <XCircle className="h-5 w-5 text-red-500" />,
       });
     } finally {
       setIsSubmitting(false);
