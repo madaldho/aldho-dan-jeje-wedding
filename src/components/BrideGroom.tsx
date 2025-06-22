@@ -27,7 +27,7 @@ const BrideGroom = () => {
       <div className="container mx-auto max-w-7xl relative z-10 px-4 md:px-8">
         <div className="text-center mb-16" data-aos="fade-up">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-slate-800 font-elegant gradient-text animate-shimmer">
-            Pengantin
+            Mempelai
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
             Dengan ridho dan rahmat Allah SWT, kami bermaksud menyelenggarakan syukuran pernikahan kami.

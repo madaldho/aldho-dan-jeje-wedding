@@ -51,7 +51,7 @@ const EventDetails = () => {
                   </div>
                 </div>
                 
-                <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 font-elegant">Akad Nikah</h3>
+                <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 font-elegant">Akad Nikah & Resepsi</h3>
                 <div className="w-24 h-1 bg-gradient-to-r from-rose-400 to-pink-400 mx-auto rounded-full mb-8"></div>
                 
                 <div className="space-y-4 text-lg md:text-xl text-gray-800 font-medium">
@@ -77,7 +77,7 @@ const EventDetails = () => {
                   </div>
                 </div>
                 
-                <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 font-elegant">Resepsi</h3>
+                <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 font-elegant">Lokasi</h3>
                 <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-pink-400 mx-auto rounded-full mb-8"></div>
                 
                 <div className="space-y-3 text-lg md:text-xl text-gray-800 font-medium">

@@ -37,7 +37,7 @@ const CountdownTimer = () => {
   ];
 
   return (
-    <section id="countdown" className="relative overflow-hidden w-full min-h-[60vh] bg-gradient-to-br from-pink-400 via-rose-200 to-pink-100">
+    <section id="countdown" className="relative overflow-hidden w-full min-h-[60vh] bg-gradient-to-b from-pink-400 via-rose-200 to-pink-100">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div 

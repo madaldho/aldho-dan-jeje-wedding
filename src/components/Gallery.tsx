@@ -96,7 +96,7 @@ const Gallery = () => {
         {/* Video Section */}
         <div className="glass-card p-8 md:p-12 text-center rounded-lg">
           <h3 className="text-3xl md:text-4xl font-bold mb-12 text-slate-800 font-elegant gradient-text animate-shimmer">
-            Video Pre-Wedding
+            Video 
           </h3>
           
           <div className="max-w-lg mx-auto">
