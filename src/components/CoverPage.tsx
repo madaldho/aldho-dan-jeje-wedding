@@ -19,7 +19,6 @@ interface FlowerBalloonsHandle {
 }
 
 const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
-<<<<<<< HEAD
   const flowerBalloonsRef = useRef<FlowerBalloonsHandle>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -50,20 +49,13 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
     openFullscreen();
     if (flowerBalloonsRef.current) {
       flowerBalloonsRef.current.launchAnimation();
-=======
-  const flowerBalloonsRef = useRef<HTMLDivElement>(null);
-
-  const handleOpenInvitation = () => {
-    // Launch flower balloons animation
-    if (flowerBalloonsRef.current && 'launchAnimation' in flowerBalloonsRef.current) {
-      (flowerBalloonsRef.current as any).launchAnimation();
->>>>>>> 44c18459c2370fd54746d15aeed743029e8368f5
     }
     setTimeout(() => {
       onOpenInvitation();
-<<<<<<< HEAD
     }, 1500);
-  };  return (
+  };
+
+  return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50 wedding-content">
       {/* Premium Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-pink-100/80 via-rose-100/60 to-purple-100/80 animate-gradient"></div>
@@ -72,24 +64,6 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0 bg-gradient-to-r from-pink-200/40 to-rose-200/40 animate-wave"></div>
         <div className="absolute inset-0 bg-gradient-to-l from-purple-200/30 to-pink-200/30 animate-wave-reverse"></div>
-=======
-    }, 500);
-  };
-
-  return (
-    <div 
-      className="min-h-screen relative overflow-hidden flex items-center justify-center animate-fadeIn wedding-content"
-    >
-      {/* Animated Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center animate-pulse"
-        style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")',
-          animationDuration: '20s'
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-pink-900/80 via-rose-800/70 to-orange-700/80"></div>
->>>>>>> 44c18459c2370fd54746d15aeed743029e8368f5
       </div>
 
       {/* Enhanced Floating Particles */}
@@ -124,7 +98,8 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
       </div>
 
       {/* Main Content with Enhanced Animations */}
-      <div className="relative z-20 text-center px-4 w-full max-w-sm mx-auto h-full flex flex-col justify-center py-8 animate-main-entrance">        
+      <div className="relative z-20 text-center px-4 w-full max-w-sm mx-auto h-full flex flex-col justify-center py-8 animate-main-entrance">
+        
         {/* Islamic Greeting */}
         <div className="luxury-card mb-6 animate-card-entrance-1">
           <div className="text-center">
@@ -185,40 +160,6 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
             </div>
           </div>
         )}
-<<<<<<< HEAD
-=======
-        
-        {/* Wedding Announcement */}
-        <div 
-          className="mb-8 animate-slideUp"
-          style={{ animationDelay: '1s' }}
-        >
-          <div className="bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/30 shadow-2xl">
-            <p className="text-sm font-light tracking-wide mb-4 opacity-90">
-              Kami mengundang Anda untuk berbagi kebahagiaan dalam
-            </p>
-            <h2 
-              className="text-2xl font-bold mb-4 text-pink-300 bg-gradient-to-r from-pink-300 to-orange-300 bg-clip-text gradient-text font-elegant animate-pulse"
-            >
-              Pernikahan Kami
-            </h2>
-            <div className="flex justify-center space-x-2 mb-4">
-              {[...Array(3)].map((_, i) => (
-                <div
-                  key={i}
-                  className="animate-spin"
-                  style={{ 
-                    animationDuration: `${4 + i}s`,
-                    animationDelay: `${i * 0.7}s`
-                  }}
-                >
-                  <Flower className="text-orange-300 animate-pulse" size={18} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
->>>>>>> 44c18459c2370fd54746d15aeed743029e8368f5
 
         {/* CTA Button */}
         <div className="animate-button-entrance">
@@ -236,14 +177,14 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
 
       <FlowerBalloons ref={flowerBalloonsRef} type="mixed" count={25} />
       <audio ref={audioRef} src="/among-us-role-reveal-sound-effect-359833.mp3" preload="auto" />
 
       <style jsx>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap');
-          .luxury-card {
+        
+        .luxury-card {
           background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
           backdrop-filter: blur(20px);
           border: 1px solid rgba(255,255,255,0.8);
@@ -254,13 +195,6 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
             0 0 0 1px rgba(255,255,255,0.5) inset;
           position: relative;
           overflow: hidden;
-=======
-      
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
->>>>>>> 44c18459c2370fd54746d15aeed743029e8368f5
         }
         
         .luxury-card::before {
@@ -320,7 +254,8 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
           box-shadow: 
             0 20px 40px rgba(244, 63, 94, 0.5),
             0 0 0 1px rgba(255,255,255,0.3) inset;
-        }        
+        }
+        
         .luxury-ornament {
           width: 60px;
           height: 1px;
@@ -528,6 +463,11 @@ const CoverPage = ({ guestName, onOpenInvitation }: CoverPageProps) => {
           0% { transform: scale(0) rotate(0deg); opacity: 0; }
           50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
           100% { transform: scale(1) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes slideUp {
+          from { transform: translateY(30px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
         }
         
         /* Animation Applications */
