@@ -26,8 +26,8 @@ const DigitalGift = () => {
       name: 'NUR AZIZAH',
       number: '7140285972',
       icon: CreditCard,
-      color: 'from-pink-500 to-rose-500',
-      bgGradient: 'from-rose-100 to-pink-100'
+      color: 'from-yellow-400 to-yellow-600',
+      bgGradient: 'from-yellow-100 to-yellow-200'
     },
     {
       id: 'dana',
@@ -35,8 +35,8 @@ const DigitalGift = () => {
       name: 'Jedo',
       number: '081387013123',
       icon: Smartphone,
-      color: 'from-rose-500 to-pink-500',
-      bgGradient: 'from-pink-100 to-rose-100'
+      color: 'from-sky-300 to-blue-400',
+      bgGradient: 'from-sky-100 to-blue-100'
     }
   ];
 
@@ -76,7 +76,7 @@ const DigitalGift = () => {
               >
                 <div className="flex items-center mb-4">
                   <div className={`p-3 rounded-full bg-gradient-to-br ${account.bgGradient}`}>
-                    <IconComponent className="w-6 h-6 text-rose-500" />
+                    <IconComponent className={`w-6 h-6 ${account.id === 'bsi' ? 'text-yellow-600' : 'text-blue-500'}`} />
                   </div>
                   <h3 className="ml-4 text-2xl font-semibold text-rose-700 font-elegant">{account.bank}</h3>
                 </div>
