@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
@@ -18,7 +19,7 @@ const HeroSection = () => {
   return (
     <section 
       id="hero" 
-      className="min-h-screen h-screen relative flex items-center justify-center overflow-hidden bg-rose-50"
+      className="min-h-screen h-screen relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50"
       onMouseMove={handleMouseMove}
     >
       {/* Background Gradient Animation */}
@@ -38,7 +39,7 @@ const HeroSection = () => {
           return (
             <div
               key={i}
-              className="absolute rounded-full bg-rose-200/50 animate-float"
+              className="absolute rounded-full bg-rose-300/40 animate-float"
               style={{
                 width: `${size}px`,
                 height: `${size}px`,
@@ -56,23 +57,23 @@ const HeroSection = () => {
       {/* Main Content */}
       <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
         <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-lg md:text-xl text-rose-800 font-light tracking-widest mb-4 uppercase">
+          <p className="text-lg md:text-xl text-rose-700 font-light tracking-widest mb-4 uppercase">
             The Wedding Of
           </p>
         </div>
         
         <div className={`relative transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 text-rose-800 font-elegant">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 text-rose-700 font-elegant">
             Aldho
           </h1>
-          <div className="my-6 md:my-8 text-4xl md:text-5xl font-elegant text-rose-500">&</div>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 text-rose-800 font-elegant">
+          <div className="my-6 md:my-8 text-4xl md:text-5xl font-elegant text-pink-500">&</div>
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 text-rose-700 font-elegant">
             Jeje
           </h1>
         </div>
         
         <div className={`transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-          <p className="text-lg md:text-xl text-rose-800 font-light mb-2">
+          <p className="text-lg md:text-xl text-rose-600 font-light mb-2">
            Minggu, 13 Juli 2025
           </p>
         </div>
@@ -83,7 +84,7 @@ const HeroSection = () => {
               <div className="w-6 h-10 border-2 border-rose-400 rounded-full mx-auto relative">
                 <div className="w-1 h-3 bg-rose-400 rounded-full mx-auto mt-2 animate-pulse"></div>
               </div>
-              <p className="text-xs text-slate-500 mt-2 font-light">Scroll Down</p>
+              <p className="text-xs text-rose-500 mt-2 font-light">Scroll Down</p>
             </div>
         </div>
       </div>
