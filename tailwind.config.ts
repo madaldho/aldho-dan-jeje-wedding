@@ -8,6 +8,17 @@ export default {
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
 	],
+	safelist: [
+		'bg-gradient-to-br',
+		'from-pink-500',
+		'to-rose-500',
+		'from-pink-400',
+		'to-rose-400',
+		'from-rose-400',
+		'to-pink-400',
+		'from-rose-300',
+		'to-pink-300'
+	],
 	prefix: "",
 	theme: {
 		container: {

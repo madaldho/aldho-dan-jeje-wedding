@@ -30,11 +30,21 @@ const CountdownTimer = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const getTimeUnitStyle = (index: number) => {
+    const gradients = [
+      'bg-gradient-to-br from-pink-500 to-rose-500',
+      'bg-gradient-to-br from-pink-400 to-rose-400', 
+      'bg-gradient-to-br from-rose-400 to-pink-400',
+      'bg-gradient-to-br from-rose-300 to-pink-300'
+    ];
+    return gradients[index] || gradients[0];
+  };
+
   const timeUnits = [
-    { label: 'Hari', value: timeLeft.days, color: 'from-pink-500 to-rose-500' },
-    { label: 'Jam', value: timeLeft.hours, color: 'from-pink-400 to-rose-400' },
-    { label: 'Menit', value: timeLeft.minutes, color: 'from-rose-400 to-pink-400' },
-    { label: 'Detik', value: timeLeft.seconds, color: 'from-rose-300 to-pink-300' }
+    { label: 'Hari', value: timeLeft.days },
+    { label: 'Jam', value: timeLeft.hours },
+    { label: 'Menit', value: timeLeft.minutes },
+    { label: 'Detik', value: timeLeft.seconds }
   ];
 
   return (
@@ -71,23 +81,23 @@ const CountdownTimer = () => {
             <Heart className="text-rose-500 animate-bounce" size={32} />
             <Stars className="text-pink-500 animate-pulse" size={28} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-rose-600 bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text font-serif gradient-text">
-       Save the Date!
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-rose-600 font-serif">
+            Save the Date!
           </h2>
-          <p className="text-lg md:text-xl mb-12 text-rose-600 font-light">
+          <p className="text-lg md:text-xl mb-12 text-rose-700 font-medium">
             Waktu tersisa hingga momen yang tak terlupakan kami
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-12">
             {timeUnits.map((item, index) => (
               <div 
                 key={item.label}
-                className={`bg-gradient-to-br ${item.color} rounded-2xl p-6 md:p-8 transform transition-all duration-700 hover:shadow-[0_0_30px_rgba(244,114,182,0.3)] relative group shadow-lg border border-white/40 backdrop-blur-[2px]`}
+                className={`${getTimeUnitStyle(index)} rounded-2xl p-6 md:p-8 transform transition-all duration-700 hover:shadow-[0_0_30px_rgba(244,114,182,0.3)] relative group shadow-lg border border-white/40`}
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
-                <div className="text-4xl md:text-5xl font-bold mb-3 text-white drop-shadow-md">
+                <div className="text-4xl md:text-5xl font-bold mb-3 text-white">
                   {item.value.toString().padStart(2, '0')}
                 </div>
-                <div className="text-base md:text-lg font-semibold text-white drop-shadow-sm">
+                <div className="text-base md:text-lg font-semibold text-white">
                   {item.label}
                 </div>
                 <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -97,7 +107,7 @@ const CountdownTimer = () => {
               </div>
             ))}
           </div>
-          <div className="text-xl md:text-2xl font-serif text-rose-600 bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text gradient-text animate-pulse-slow">
+          <div className="text-xl md:text-2xl font-serif text-rose-600 font-bold animate-pulse-slow">
             13 Juli 2025 • 11:00 WIB
           </div>
         </div>

@@ -113,8 +113,8 @@ const EventDetails = () => {
             <div className="grid md:grid-cols-2 gap-6">
               <ShinyButton
                 onClick={handleOpenMaps}
-                className="w-full bg-gradient-to-r from-rose-500 to-orange-500 text-white 
-                py-4 px-6 text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl
+                className="w-full bg-white/90 hover:bg-white text-rose-600 border border-rose-200 shadow-sm 
+                py-4 px-6 text-lg font-bold rounded-2xl hover:shadow-md
                 transition-all duration-300 ease-in-out transform hover:-translate-y-1
                 flex items-center justify-center gap-3"
               >

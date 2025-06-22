@@ -7,6 +7,7 @@ import CountdownTimer from '../components/CountdownTimer';
 import BrideGroom from '../components/BrideGroom';
 import EventDetails from '../components/EventDetails';
 import Gallery from '../components/Gallery';
+import VideoGallery from '../components/VideoGallery';
 import RSVPWishes from '../components/RSVPWishes'; // Import the new component
 import DigitalGift from '../components/DigitalGift';
 
@@ -97,6 +98,14 @@ const Index = () => {
           <div className="section-container">
             <div id="gallery">
               <Gallery />
+            </div>
+          </div>
+        </ScrollAnimation>
+
+        <ScrollAnimation animation="zoomIn" delay={0.4} duration={1.1}>
+          <div className="section-container">
+            <div id="video-gallery">
+              <VideoGallery />
             </div>
           </div>
         </ScrollAnimation>

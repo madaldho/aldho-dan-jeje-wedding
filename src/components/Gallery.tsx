@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GlareCard } from '@/components/ui/glare-card';
 import AOS from 'aos';
@@ -7,7 +7,6 @@ import 'aos/dist/aos.css';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   useEffect(() => {
     AOS.init({
@@ -27,7 +26,7 @@ const Gallery = () => {
     'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
   ];
 
-  const videoUrl = "https://videos.pexels.com/video-files/854251/854251-hd_1280_720_30fps.mp4";
+
 
   const nextImage = () => {
     setSelectedImage(prev => prev !== null ? (prev + 1) % images.length : 0);
@@ -52,15 +51,15 @@ const Gallery = () => {
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold mb-8 text-slate-800 font-elegant gradient-text animate-shimmer">
-            Galeri Foto & Video
+            Galeri Foto
           </h2>
           <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-medium">
-            Koleksi momen indah perjalanan cinta kami
+            Koleksi foto indah perjalanan cinta kami
           </p>
         </div>
 
         {/* Photo Gallery */}
-        <div className="mb-24 glass-card p-8 md:p-12 rounded-lg">
+        <div className="glass-card p-8 md:p-12 rounded-lg">
           <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-800 font-elegant gradient-text animate-shimmer">
             Foto Pre-Wedding
           </h3>
@@ -93,113 +92,71 @@ const Gallery = () => {
           </div>
         </div>
 
-        {/* Video Section */}
-        <div className="glass-card p-8 md:p-12 text-center rounded-lg">
-          <h3 className="text-3xl md:text-4xl font-bold mb-12 text-slate-800 font-elegant gradient-text animate-shimmer">
-            Video 
-          </h3>
-          
-          <div className="max-w-lg mx-auto">
-            <div
-              className="group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2"
-              onClick={() => setSelectedVideo(videoUrl)}
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-             
-                <GlareCard className="relative overflow-hidden rounded-2xl shadow-lg">
-                  <div className="aspect-video bg-gradient-to-br from-rose-500 via-pink-500 to-orange-500 flex items-center justify-center relative">
-                    <div className="absolute inset-0 bg-black/20"></div>
-                    <div className="text-center text-white relative z-10">
-                      <div className="bg-white/30 backdrop-blur-md rounded-full p-6 mb-6 inline-block group-hover:bg-white/40 transition-all duration-300 animate-pulse">
-                        <Play className="w-10 h-10 ml-1" />
-                      </div>
-                      <p className="text-xl font-bold mb-2 gradient-text-white animate-shimmer">Tonton Video Pre-Wedding</p>
-                      <p className="text-sm opacity-90">Klik untuk memutar</p>
-                    </div>
-                  </div>
-                </GlareCard>
-              
-            </div>
-          </div>
-        </div>
+
       </div>
 
-      {/* Image Modal */}
+      {/* Image Modal - Fullscreen Popup */}
       {selectedImage !== null && (
         <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center cursor-pointer backdrop-blur-sm"
           onClick={() => setSelectedImage(null)}
         >
           <div
-            className="relative max-w-4xl w-full cursor-default"
+            className="relative w-full h-full flex items-center justify-center cursor-default animate-in fade-in-0 zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Close Button */}
             <Button
               variant="ghost"
               size="icon"
-              className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:bg-white/20 z-20 bg-black/50 backdrop-blur-sm rounded-full"
               onClick={() => setSelectedImage(null)}
             >
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5 md:w-6 md:h-6" />
             </Button>
             
+            {/* Previous Button */}
             <Button
               variant="ghost"
               size="icon"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20"
+              className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20 z-20 bg-black/50 backdrop-blur-sm rounded-full"
               onClick={prevImage}
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </Button>
             
+            {/* Next Button */}
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20"
+              className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20 z-20 bg-black/50 backdrop-blur-sm rounded-full"
               onClick={nextImage}
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </Button>
             
-            <img
-              src={images[selectedImage]}
-              alt={`Pre-wedding photo ${selectedImage + 1}`}
-              className="w-full h-auto max-h-[90vh] object-contain rounded-lg"
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Video Modal */}
-      {selectedVideo && (
-        <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
-          onClick={() => setSelectedVideo(null)}
-        >
-          <div
-            className="relative w-full max-w-4xl cursor-default"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute -top-12 right-0 text-white hover:bg-white/20 z-10"
-              onClick={() => setSelectedVideo(null)}
-            >
-              <X className="w-6 h-6" />
-            </Button>
-            <div className="aspect-video w-full bg-black rounded-lg overflow-hidden shadow-2xl">
-              <video
-                src={selectedVideo}
-                controls
-                autoPlay
-                className="w-full h-full"
+            {/* Image Container */}
+            <div className="w-full h-full flex items-center justify-center p-2 md:p-4">
+              <img
+                src={images[selectedImage]}
+                alt={`Pre-wedding photo ${selectedImage + 1}`}
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                style={{
+                  maxHeight: 'calc(100vh - 16px)',
+                  maxWidth: 'calc(100vw - 16px)'
+                }}
               />
+            </div>
+            
+            {/* Image Counter */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">
+              {selectedImage + 1} / {images.length}
             </div>
           </div>
         </div>
       )}
+
+
     </section>
   );
 };

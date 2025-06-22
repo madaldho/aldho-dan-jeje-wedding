@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { LimelightNav, NavItem } from '@/components/ui/limelight-nav';
-import { Home, Heart, Calendar, Camera, Mail } from 'lucide-react';
+import { Home, Heart, Calendar, Camera, Video, Mail } from 'lucide-react';
 import { scroller } from 'react-scroll';
 
 const navItems: NavItem[] = [
@@ -13,7 +13,8 @@ const navItems: NavItem[] = [
 		sectionId: 'bride-groom',
 	},
 	{ id: 'event-details', icon: <Calendar />, label: 'Acara', sectionId: 'event-details' },
-	{ id: 'gallery', icon: <Camera />, label: 'Galeri', sectionId: 'gallery' },
+	{ id: 'gallery', icon: <Camera />, label: 'Foto', sectionId: 'gallery' },
+	{ id: 'video-gallery', icon: <Video />, label: 'Video', sectionId: 'video-gallery' },
 	{ id: 'rsvp-wishes', icon: <Mail />, label: 'Ucapan', sectionId: 'rsvp-wishes' },
 ];
 
