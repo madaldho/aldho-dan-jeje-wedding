@@ -54,11 +54,17 @@ export const LimelightNav = ({
     const activeItem = navItemRefs.current[activeLink];
     
     if (limelight && activeItem) {
-      const newLeft = activeItem.offsetLeft + activeItem.offsetWidth / 2 - limelight.offsetWidth / 2;
-      limelight.style.left = `${newLeft}px`;
-
-      if (!isReady) {
-        setTimeout(() => setIsReady(true), 50);
+      // Ensure we have valid activeLink index
+      const validActiveLink = Math.max(0, Math.min(activeLink, items.length - 1));
+      const targetItem = navItemRefs.current[validActiveLink];
+      
+      if (targetItem) {
+        const newLeft = targetItem.offsetLeft + targetItem.offsetWidth / 2 - limelight.offsetWidth / 2;
+        limelight.style.left = `${newLeft}px`;
+        
+        if (!isReady) {
+          setTimeout(() => setIsReady(true), 50);
+        }
       }
     }
   }, [activeLink, isReady, items]);
@@ -66,9 +72,32 @@ export const LimelightNav = ({
   // Ensure limelight updates when component mounts or items change
   useEffect(() => {
     if (items.length > 0 && !isReady) {
-      setTimeout(() => setIsReady(true), 100);
+      // Delay to ensure DOM is ready
+      const timer = setTimeout(() => {
+        setIsReady(true);
+      }, 150);
+      
+      return () => clearTimeout(timer);
     }
   }, [items, isReady]);
+
+  // Handle window resize to recalculate limelight position
+  useEffect(() => {
+    const handleResize = () => {
+      if (isReady) {
+        const limelight = limelightRef.current;
+        const activeItem = navItemRefs.current[activeLink];
+        
+        if (limelight && activeItem) {
+          const newLeft = activeItem.offsetLeft + activeItem.offsetWidth / 2 - limelight.offsetWidth / 2;
+          limelight.style.left = `${newLeft}px`;
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [activeLink, isReady]);
 
   if (items.length === 0) {
     return null; 

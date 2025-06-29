@@ -13,7 +13,7 @@ const navItems: NavItem[] = [
 		sectionId: 'bride-groom',
 	},
 	{ id: 'event-details', icon: <Calendar />, label: 'Acara', sectionId: 'event-details' },
-	{ id: 'gallery', icon: <Camera />, label: 'Foto', sectionId: 'gallery' },
+	// { id: 'gallery', icon: <Camera />, label: 'Foto', sectionId: 'gallery' },
 	{ id: 'video-gallery', icon: <Video />, label: 'Video', sectionId: 'video-gallery' },
 	{ id: 'rsvp-wishes', icon: <Mail />, label: 'Ucapan', sectionId: 'rsvp-wishes' },
 ];
@@ -23,36 +23,60 @@ const StickyNav = () => {
 	const [isSticky, setIsSticky] = useState(false);
 	const isScrollingRef = useRef(false);
 	const scrollTimeoutRef = useRef<number>();
+	const lastManualScrollRef = useRef<number>(-1);
 
 	const handleScroll = useCallback(() => {
 		const offset = window.scrollY;
 		setIsSticky(offset > window.innerHeight * 0.8);
 
+		// Don't update active link during manual scrolling
 		if (isScrollingRef.current) return;
 
-		const sections = navItems.map(item => document.getElementById(item.sectionId));
-		const scrollPosition = window.scrollY + 200; // Adjusted offset for better detection
+		const sections = navItems.map(item => document.getElementById(item.sectionId)).filter(Boolean);
+		const scrollPosition = window.scrollY + 150; // Better offset for detection
 
-		// Find the current section
+		// Find the current section with improved logic
 		let currentSection = 0;
-		for (let i = sections.length - 1; i >= 0; i--) {
+		let minDistance = Infinity;
+		
+		for (let i = 0; i < sections.length; i++) {
 			const section = sections[i];
-			if (section && section.offsetTop <= scrollPosition) {
-				currentSection = i;
-				break;
+			if (section) {
+				const sectionTop = section.offsetTop;
+				const sectionBottom = sectionTop + section.offsetHeight;
+				
+				// Check if scroll position is within this section
+				if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+					currentSection = i;
+					break;
+				}
+				
+				// Find closest section if none contains the scroll position
+				const distance = Math.abs(scrollPosition - sectionTop);
+				if (distance < minDistance) {
+					minDistance = distance;
+					currentSection = i;
+				}
 			}
 		}
 
-		setActiveLink(currentSection);
+		// Only update if it's different from last manual scroll target
+		if (lastManualScrollRef.current === -1 || currentSection !== lastManualScrollRef.current) {
+			setActiveLink(currentSection);
+		}
 	}, []);
 
 	useEffect(() => {
-		window.addEventListener('scroll', handleScroll);
+		const throttledHandleScroll = () => {
+			requestAnimationFrame(handleScroll);
+		};
+		
+		window.addEventListener('scroll', throttledHandleScroll, { passive: true });
 		// Initial call to set the correct active section
 		handleScroll();
 
 		return () => {
-			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('scroll', throttledHandleScroll);
 			if (scrollTimeoutRef.current) {
 				clearTimeout(scrollTimeoutRef.current);
 			}
@@ -60,6 +84,9 @@ const StickyNav = () => {
 	}, [handleScroll]);
 
 	const handleTabChange = useCallback((index: number) => {
+		// Store the target index for manual scroll
+		lastManualScrollRef.current = index;
+		
 		// Immediately update the active link for instant visual feedback
 		setActiveLink(index);
 		
@@ -72,16 +99,17 @@ const StickyNav = () => {
 
 		// Scroll to the section
 		scroller.scrollTo(navItems[index].sectionId, {
-			duration: 800,
+			duration: 1000,
 			delay: 0,
 			smooth: 'easeInOutQuart',
-			offset: -100, // Adjusted offset for better positioning
+			offset: -80, // Better offset for positioning
 		});
 
-		// Reset scrolling flag after animation completes
+		// Reset scrolling flag and manual scroll reference after animation completes
 		scrollTimeoutRef.current = window.setTimeout(() => {
 			isScrollingRef.current = false;
-		}, 1000); // Increased timeout to ensure scroll completes
+			lastManualScrollRef.current = -1; // Reset manual scroll reference
+		}, 1200); // Longer timeout to ensure scroll completes
 	}, []);
 
 	return (

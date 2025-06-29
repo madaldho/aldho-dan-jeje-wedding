@@ -62,7 +62,8 @@ const Index = () => {
       <FloatingParticles />
       <FloralElements />
       <MusicPlayer />
-      <StickyNav />
+      {/* Sticky Navigation - Removed */}
+      {/* <StickyNav /> */}
       
       {/* Gradient Blur Overlay */}
       <div className={`scroll-gradient-overlay ${showScrollOverlay ? 'active' : ''}`}></div>
@@ -94,13 +95,13 @@ const Index = () => {
           </div>
         </ScrollAnimation>
         
-        <ScrollAnimation animation="slideInBounce" delay={0.3} duration={1.0}>
+        {/* <ScrollAnimation animation="slideInBounce" delay={0.3} duration={1.0}>
           <div className="section-container">
             <div id="gallery">
               <Gallery />
             </div>
           </div>
-        </ScrollAnimation>
+        </ScrollAnimation> */}
 
         <ScrollAnimation animation="zoomIn" delay={0.4} duration={1.1}>
           <div className="section-container">
