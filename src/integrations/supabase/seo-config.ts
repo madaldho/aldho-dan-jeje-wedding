@@ -16,8 +16,8 @@ export const CACHE_DURATIONS = {
 
 // Function to create a Supabase client with optimized settings
 export const createOptimizedClient = () => {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-  const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+  const supabaseUrl = "https://cisgtbibblwmcbewkefp.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNpc2d0YmliYmx3bWNiZXdrZWZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk5OTc1NDEsImV4cCI6MjA2NTU3MzU0MX0.nnS9D7snyrHu39mVEiK3t26oy9DhrpekfR9gJEbiUOY";
   
   return createClient(supabaseUrl, supabaseKey, {
     auth: {
