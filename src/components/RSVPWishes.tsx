@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { optimizedSupabase, fetchWishesWithCaching } from '@/integrations/supabase/seo-config';
 import { Heart, Send, Users, Calendar, MessageSquare, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -41,6 +42,7 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
   ];
 
   useEffect(() => {
+    // Inisialisasi AOS hanya untuk elemen selain papan ucapan
     AOS.init({
       duration: 1000,
       easing: 'ease-in-out-cubic',
@@ -53,13 +55,8 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
   const fetchWishes = async () => {
     setLoadingWishes(true);
     try {
-      const { data, error } = await supabase
-        .from('rsvp_responses')
-        .select('id, name, message, created_at')
-        .not('message', 'is', null)
-        .not('message', 'eq', '')
-        .order('created_at', { ascending: false })
-        .limit(10);
+      // Menggunakan fungsi yang dioptimalkan untuk SEO dengan caching
+      const { data, error } = await fetchWishesWithCaching(10);
 
       if (error) throw error;
       setWishes(data || []);
@@ -83,7 +80,7 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { error } = await optimizedSupabase
         .from('rsvp_responses')
         .insert({
           name: formData.name,
@@ -119,7 +116,7 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-rose-50 to-transparent"></div>
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="text-center mb-16" data-aos="fade-up">
+        <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-slate-800 font-elegant gradient-text animate-shimmer">
             Kehadiran & Doa
           </h2>
@@ -130,7 +127,7 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
 
         <div className="max-w-4xl mx-auto">
           {/* RSVP Form Section */}
-          <div className="mb-20" data-aos="fade-up" data-aos-delay="100">
+          <div className="mb-20">
             <div className="bg-white/60 backdrop-blur-lg rounded-2xl shadow-lg border border-white/50 p-8 md:p-12">
               <h3 className="text-3xl md:text-4xl font-bold text-slate-800 font-elegant mb-8 flex items-center gap-3 justify-center">
                 <Calendar className="w-8 h-8 text-rose-500" />
@@ -205,7 +202,7 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
           </div>
 
           {/* Wishes List Section */}
-          <div data-aos="fade-up" data-aos-delay="200">
+          <div>
             <div className="bg-white/60 backdrop-blur-lg rounded-2xl shadow-lg border border-white/50 p-8 md:p-12">
               <h3 className="text-3xl md:text-4xl font-bold text-slate-800 font-elegant mb-8 flex items-center gap-3 justify-center">
                 <MessageSquare className="w-8 h-8 text-rose-500" />
@@ -216,29 +213,27 @@ const RSVPWishes = ({ guestName }: RSVPWishesProps) => {
                   <Loader2 className="w-8 h-8 text-rose-500 animate-spin" />
                 </div>
               ) : wishes.length > 0 ? (
-                <div className="space-y-6 max-h-[600px] overflow-y-auto pr-4 -mr-4 custom-scrollbar">
+                <div className="space-y-6 max-h-[500px] overflow-y-auto px-2 md:px-4 custom-scrollbar">
                   {wishes.map((wish, index) => {
                     const gradient = colorGradients[index % colorGradients.length];
                     return (
                     <div
                       key={wish.id}
-                      className="bg-white/70 backdrop-blur-sm p-5 rounded-xl border border-rose-100 shadow-md transition-all duration-300 hover:shadow-lg hover:border-rose-200 hover:-translate-y-1"
-                      data-aos="fade-up"
-                      data-aos-delay={`${100 + index * 50}`}
+                      className="bg-white/70 backdrop-blur-sm p-4 md:p-5 rounded-xl border border-rose-100 shadow-md transition-all duration-300 hover:shadow-lg hover:border-rose-200 hover:-translate-y-1"
                     >
-                      <div className="flex items-start">
-                        <div className={`w-12 h-12 bg-gradient-to-br ${gradient} rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg flex-shrink-0 border-2 border-white/80 transform transition-transform duration-300 hover:scale-110`}>
+                      <div className="flex flex-col md:flex-row md:items-start gap-3 md:gap-0">
+                        <div className={`w-12 h-12 bg-gradient-to-br ${gradient} rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg flex-shrink-0 border-2 border-white/80 transform transition-transform duration-300 hover:scale-110 mx-auto md:mx-0`}>
                           {wish.name.charAt(0).toUpperCase()}
                         </div>
-                        <div className="ml-4 flex-grow">
-                          <div className="flex justify-between items-baseline">
+                        <div className="md:ml-4 flex-grow">
+                          <div className="flex flex-col md:flex-row md:justify-between md:items-baseline text-center md:text-left">
                             <p className="font-semibold text-slate-800 text-lg">{wish.name}</p>
-                            <p className="text-xs text-slate-500">
+                            <p className="text-xs text-slate-500 mt-1 md:mt-0">
                               {new Date(wish.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                             </p>
                           </div>
-                          <blockquote className="relative mt-2">
-                            <p className="text-slate-700 text-base italic bg-rose-50/60 px-4 py-3 rounded-lg border-l-4 border-rose-200">
+                          <blockquote className="relative mt-3">
+                            <p className="text-slate-700 text-base italic bg-rose-50/60 px-4 py-3 rounded-lg border-l-4 border-rose-200 break-words">
                               "{wish.message}"
                             </p>
                           </blockquote>

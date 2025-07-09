@@ -3,20 +3,20 @@ import { Heart, Flower, MapPin } from 'lucide-react';
 
 const BrideGroom = () => {
   const bride = {
-    name: "Nur Azizah, S. Pd",
-    fullName: "Nur Azizah, S. Pd",
+    name: "Nur Azizah, S.Pd.",
+    fullName: "Nur Azizah, S.Pd.",
     nickname: "Jeje",
-    parents: "Putri dari Bpk. Tahudin, S. Pd, SD & Ibu Nur Fathiya",
+    parents: "Putri dari Bpk. Tahudin, S.Pd.SD. & Ibu Nur Fathiya",
     image: "/jeje.webp",
     
     
   };
 
   const groom = {
-    name: "Muhamad Ali Ridho, S. Pd",
-    fullName: "Muhamad Ali Ridho, S. Pd",
+    name: "Muhamad Ali Ridho, S.Pd.",
+    fullName: "Muhamad Ali Ridho, S.Pd.",
     nickname: "Aldho",
-    parents: "Putra dari Bpk. Ahmad Muhtar, S. Pd. I & Ibu Nuraeni, S. Pd.I",
+    parents: "Putra dari Bpk. Ahmad Muhtar, S.Pd.I. & Ibu Nuraeni, S.Pd.I.",
     image: "/aldho (2).webp",
    
   };

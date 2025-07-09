@@ -32,7 +32,7 @@ const DigitalGift = () => {
     {
       id: 'dana',
       bank: 'DANA',
-      name: 'Jedo',
+      name: 'MUHAMAD ALI RIDHO',
       number: '081387013123',
       icon: Smartphone,
       color: 'from-sky-300 to-blue-400',

@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import CoverPage from '../components/CoverPage';
 import HeroSection from '../components/HeroSection';
 import CountdownTimer from '../components/CountdownTimer';
@@ -16,6 +17,7 @@ import StickyNav from '../components/StickyNav';
 
 import FloralElements from '../components/FloralElements';
 import { ScrollAnimation, FloatingParticles, ParallaxSection } from '../components/ScrollAnimations';
+import SchemaMarkup from '../components/SchemaMarkup';
 
 const Index = () => {
   const [showInvitation, setShowInvitation] = useState(false);
@@ -56,6 +58,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      <Helmet>
+        <SchemaMarkup 
+          brideFullName="Jeje"
+          groomFullName="Aldho"
+          eventDate="2025-07-13"
+          eventStartTime="08:00:00"
+          eventEndTime="16:00:00"
+          eventLocation="Venue Name"
+          eventAddress="Venue Address, City, Indonesia"
+          eventDescription="Undangan pernikahan Aldho dan Jeje. Kami mengundang Anda untuk berbagi kebahagiaan di hari spesial kami."
+          eventImage="https://jedowedding.web.id/aldho dan jeje seo image.webp"
+          websiteUrl="https://jedowedding.web.id/"
+        />
+      </Helmet>
       {/* Fixed Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 z-0"></div>
       
