@@ -6,6 +6,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
+import type { Database } from './types';
 
 // Cache duration in seconds
 export const CACHE_DURATIONS = {
@@ -19,7 +20,7 @@ export const createOptimizedClient = () => {
   const supabaseUrl = "https://cisgtbibblwmcbewkefp.supabase.co";
   const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNpc2d0YmliYmx3bWNiZXdrZWZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk5OTc1NDEsImV4cCI6MjA2NTU3MzU0MX0.nnS9D7snyrHu39mVEiK3t26oy9DhrpekfR9gJEbiUOY";
   
-  return createClient(supabaseUrl, supabaseKey, {
+  return createClient<Database>(supabaseUrl, supabaseKey, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
@@ -44,14 +45,7 @@ export const fetchWishesWithCaching = async (limit = 10) => {
       .not('message', 'is', null)
       .not('message', 'eq', '')
       .order('created_at', { ascending: false })
-      .limit(limit)
-      .options({
-        count: 'exact',
-        head: false,
-        cache: {
-          ttl: CACHE_DURATIONS.WISHES,
-        },
-      });
+      .limit(limit);
 
     if (error) throw error;
     return { data, error: null };
@@ -67,12 +61,7 @@ export const getRSVPCountWithCaching = async () => {
     const { count, error } = await optimizedSupabase
       .from('rsvp_responses')
       .select('*', { count: 'exact', head: true })
-      .eq('attendance', 'hadir')
-      .options({
-        cache: {
-          ttl: CACHE_DURATIONS.RSVP_COUNT,
-        },
-      });
+      .eq('attendance', 'hadir');
 
     if (error) throw error;
     return { count, error: null };
